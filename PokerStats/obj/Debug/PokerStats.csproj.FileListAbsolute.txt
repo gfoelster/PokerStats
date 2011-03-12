@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\bin\PokerStats.dll
 C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\bin\PokerStats.pdb
 C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\obj\Debug\PokerStats.dll
 C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\obj\Debug\PokerStats.pdb
+=======
+C:\Projects\PokerStats\PokerStats\bin\PokerStats.dll
+C:\Projects\PokerStats\PokerStats\bin\PokerStats.pdb
+C:\Projects\PokerStats\PokerStats\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\PokerStats\PokerStats\obj\Debug\PokerStats.dll
+C:\Projects\PokerStats\PokerStats\obj\Debug\PokerStats.pdb
+>>>>>>> 13429475823b128fb77fdc1bd08e696ce6c1fdf2
