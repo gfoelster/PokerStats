@@ -11,7 +11,7 @@ namespace PokerStats
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int a = 2;
+            int a = 42;
         }
     }
 }
