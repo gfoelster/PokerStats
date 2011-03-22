@@ -1,0 +1,5 @@
+C:\Projects\PokerStats\PokerStats\bin\PokerStats.dll
+C:\Projects\PokerStats\PokerStats\bin\PokerStats.pdb
+C:\Projects\PokerStats\PokerStats\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\PokerStats\PokerStats\obj\Debug\PokerStats.dll
+C:\Projects\PokerStats\PokerStats\obj\Debug\PokerStats.pdb
