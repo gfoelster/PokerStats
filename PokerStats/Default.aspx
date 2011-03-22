@@ -2,7 +2,7 @@
     CodeBehind="Default.aspx.cs" Inherits="PokerStats._Default" %>
 <html>
     <head>
-        <title>Meine ersten Ajax Erfahrungen</title>
+        <title>Pokerstats</title>
         <script type="text/javascript">
          <!--
             function doIt() {
