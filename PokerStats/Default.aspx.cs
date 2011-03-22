@@ -11,9 +11,16 @@ namespace PokerStats
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // this is some stupid comment 
 
-            // blaaaaaaaaa
+            //var ctx = new DAL.PokerDBDataContext();
+
+            //DAL.User u = new DAL.User()
+            //{
+            //    Name = "Jeff",
+            //    PasswordHash = "Blub"
+            //};
+            //ctx.Users.InsertOnSubmit(u);
+            //ctx.SubmitChanges();
         }
     }
 }

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.75" name="PokerDB">
+  <DataContextMoniker Name="/PokerDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="3ed6bb12-42cf-4945-9d21-c9d0bd2ef966" absoluteBounds="0.75, 1.5, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/PokerDBDataContext/ActionType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ea653c40-6f22-43b3-808a-9f0a4bde83bc" absoluteBounds="0.765, 1.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cc6f9f74-e32d-4512-90cc-5fff6f71da6f" absoluteBounds="0.75, 4.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/PokerDBDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0cc483d5-ffec-4c74-b9a4-47896ff505bf" absoluteBounds="0.765, 4.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="da32c6dd-b353-4e35-ba93-241ab520dd74" absoluteBounds="3.5, 1, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/PokerDBDataContext/GameAction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6f5c15f8-3387-4bd9-8e8a-124c9f4ef6ec" absoluteBounds="3.515, 1.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8cb3cc85-cb57-4442-857a-fe79e378c343" absoluteBounds="0.75, 6.75, 2, 1.7708968098958335">
+      <DataClassMoniker Name="/PokerDBDataContext/Game" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b82f85f0-c592-49a1-a144-b9a6ddb9bd4d" absoluteBounds="0.765, 7.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 2.09699625651042); (3.5 : 2.09699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PokerDBDataContext/ActionType/ActionType_GameAction" />
+      <nodes>
+        <classShapeMoniker Id="3ed6bb12-42cf-4945-9d21-c9d0bd2ef966" />
+        <classShapeMoniker Id="da32c6dd-b353-4e35-ba93-241ab520dd74" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.28929768880208); (3.88541416666667 : 5.28929768880208 : JumpStart); (4.05208083333333 : 5.28929768880208 : JumpEnd); (4.5 : 5.28929768880208); (4.5 : 3.34780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PokerDBDataContext/User/User_GameAction" />
+      <nodes>
+        <classShapeMoniker Id="cc6f9f74-e32d-4512-90cc-5fff6f71da6f" />
+        <classShapeMoniker Id="da32c6dd-b353-4e35-ba93-241ab520dd74" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.63544840494792); (3.9687475 : 7.63544840494792); (3.9687475 : 3.34780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PokerDBDataContext/Game/Game_GameAction" />
+      <nodes>
+        <classShapeMoniker Id="8cb3cc85-cb57-4442-857a-fe79e378c343" />
+        <classShapeMoniker Id="da32c6dd-b353-4e35-ba93-241ab520dd74" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
