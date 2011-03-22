@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
-  <publishProfile publishUrl="ftp://81.20.84.98/" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profil1" publishMethod="FTP" replaceMatchingFiles="False" userName="FtpUser" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAueb0flpNkkCq2mV368/zSwAAAAACAAAAAAAQZgAAAAEAACAAAACFNYqDj0fPyWkXPbXd+Y0D3XnZR7wpZ5LLFTOnmtbs9gAAAAAOgAAAAAIAACAAAACr9bnsw5YNwQLkJrrwvH3fyHbuxWA+n2HGbGD2w/tDyRAAAADWjxoaYBLc48oRYrmgKWeKQAAAAOkmAJhcOg7WzKCTiNdHMJroP4yxg0hsAwNTnIlIAMMaSnc2lP3y0lVysHCh9OhAhRclEOb7UyiGOtJSxtUuqcI=" SelectedForPublish="True">
-    <file relUrl="Web.config" publishTime="03/22/2011 19:30:46" />
+  <publishProfile publishUrl="ftp://81.20.84.98/" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profil1" publishMethod="FTP" replaceMatchingFiles="False" userName="FtpUser" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAueb0flpNkkCq2mV368/zSwAAAAACAAAAAAAQZgAAAAEAACAAAABNiwfQWI/VjfdKLHoP6zUGIYzfiuKID5Q7F7De093wtgAAAAAOgAAAAAIAACAAAAD+BCOhC6tscrzpz90p4IzzsQLtJuh2qg7r3ecGein8HSAAAAClbDWtqjernQtpQibCLYqE2X4qx0gGck/qm0XRSPoS/EAAAADmK8XltQJ9Mb7TpTHhTim7k3BoBRr004LRKcVYXFAJ1nY+CDXs6hBpTtNKDrgDWwMySkfW0pOU7lBW6vWcPR+4" SelectedForPublish="True">
+    <file relUrl="Web.config" publishTime="03/22/2011 19:44:26" />
     <file relUrl="Account/Register.aspx" publishTime="03/12/2011 14:51:25" />
+    <file relUrl="eins/test.txt" publishTime="03/22/2011 19:43:44" />
     <file relUrl="Account/Web.config" publishTime="03/12/2011 14:51:25" />
     <file relUrl="Account/Login.aspx" publishTime="03/12/2011 14:51:25" />
     <file relUrl="Styles/Site.css" publishTime="03/12/2011 14:51:25" />
     <file relUrl="Scripts/jquery-1.4.1.js" publishTime="03/12/2011 14:51:25" />
-    <file relUrl="bin/PokerStats.pdb" publishTime="03/22/2011 19:30:11" />
+    <file relUrl="bin/PokerStats.pdb" publishTime="03/22/2011 19:47:45" />
     <file relUrl="Global.asax" publishTime="03/12/2011 14:51:25" />
     <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="03/12/2011 14:51:25" />
     <file relUrl="About.aspx" publishTime="03/17/2011 18:22:11" />
-    <file relUrl="Default.aspx" publishTime="03/22/2011 19:10:06" />
+    <file relUrl="Default.aspx" publishTime="03/22/2011 19:46:05" />
     <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="03/12/2011 14:51:25" />
-    <file relUrl="bin/PokerStats.dll" publishTime="03/22/2011 19:30:11" />
+    <file relUrl="bin/PokerStats.dll" publishTime="03/22/2011 19:47:45" />
   </publishProfile>
 </publishData>
