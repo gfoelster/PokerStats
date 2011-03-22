@@ -32,7 +32,7 @@
 
                 //anfrage erstellen (GET, url ist localhost,
                 //request ist asynchron      
-                req.open("GET", 'http://localhost/ajax-tutorial/eins/test.txt', true);
+                req.open("GET", 'http://81.20.84.98/eins/test.txt', true);
 
                 //Beim abschliessen des request wird diese Funktion ausgeführt
                 req.onreadystatechange = function () {
