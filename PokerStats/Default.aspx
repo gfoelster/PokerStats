@@ -1,17 +1,74 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Home Page" Language="C#" AutoEventWireup="true"
     CodeBehind="Default.aspx.cs" Inherits="PokerStats._Default" %>
+<html>
+    <head>
+        <title>Meine ersten Ajax Erfahrungen</title>
+        <script type="text/javascript">
+         <!--
+            function doIt() {
 
-<asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-</asp:Content>
-<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+                //erstellen des requests
+                var req = null;
+
+                try {
+                    req = new XMLHttpRequest();
+                }
+                catch (ms) {
+                    try {
+                        req = new ActiveXObject("Msxml2.XMLHTTP");
+                    }
+                    catch (nonms) {
+                        try {
+                            req = new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        catch (failed) {
+                            req = null;
+                        }
+                    }
+                }
+
+                if (req == null)
+                    alert("Error creating request object!");
+
+                //anfrage erstellen (GET, url ist localhost,
+                //request ist asynchron      
+                req.open("GET", 'http://localhost/ajax-tutorial/eins/test.txt', true);
+
+                //Beim abschliessen des request wird diese Funktion ausgeführt
+                req.onreadystatechange = function () {
+                    switch (req.readyState) {
+                        case 4:
+                            if (req.status != 200) {
+                                alert("Fehler: " + req.status);
+                            } else {
+                                //alert("Status ist: " + req.status);
+                                //schreibe die antwort in den div container mit der id content 
+                                document.getElementById('eins').innerHTML = '<strong>' +
+                                                                        req.responseText
+                                                                        + '</strong>';
+                            }
+                            break;
+
+                        default:
+                            return false;
+                            break;
+                    }
+                };
+
+                req.setRequestHeader("Content-Type",
+                                      "application/x-www-form-urlencoded");
+                req.send(null);
+            }
+         //-->
+        </script>
+    </head>
+    <body>
     <h2>
         Welcome to Pokerstats!
     </h2>
-    <p>
-        To learn more about ASP.NET visit <a href="http://www.asp.net" title="ASP.NET Website">www.asp.net</a>.
-    </p>
-    <p>
-        You can also find <a href="http://go.microsoft.com/fwlink/?LinkID=152368&amp;clcid=0x409"
-            title="MSDN ASP.NET Docs">documentation on ASP.NET at MSDN</a>.
-    </p>
-</asp:Content>
+        <div id="eins" style="width: 80%; height: 80%; border: dashed 1px;">
+            <input type="button" onclick="doIt();" value="Mach was!"/>
+        </div>
+    </body>
+</html>
+

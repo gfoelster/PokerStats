@@ -1,0 +1,5 @@
+C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\bin\PokerStats.dll
+C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\bin\PokerStats.pdb
+C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\obj\Release\PokerStats.dll
+C:\Users\Axel\Documents\Visual Studio 2010\Projects\jeff_pokerstats\PokerStats\PokerStats\obj\Release\PokerStats.pdb
