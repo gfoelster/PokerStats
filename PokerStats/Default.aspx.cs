@@ -15,16 +15,6 @@ namespace PokerStats
 
             var ctx = new DAL.PokerDBDataContext();
             List<DAL.ActionType> x = ctx.ActionTypes.ToList();
-           
-            //DAL.User u = new DAL.User()
-            //{
-            //    Name = "Jeff",
-            //    PasswordHash = "Blub"
-            //};
-            //ctx.Users.InsertOnSubmit(u);
-            //ctx.SubmitChanges();
-
-            List<DAL.ActionType> x  = ctx.ActionTypes.ToList();
 
         }
     }

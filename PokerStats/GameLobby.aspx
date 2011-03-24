@@ -12,6 +12,15 @@
     <h1>Welcome to the Lobby</h1>
         <p>Please Select a Game from the List, or create a new one.</p>
     </div>
+    <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" 
+        DataTextField="IsActive" DataValueField="IsActive"></asp:ListBox>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:PokerStatsConnectionString %>" 
+        SelectCommand="SELECT [IsActive] FROM [Games] WHERE ([IsActive] = @IsActive)">
+        <SelectParameters>
+            <asp:Parameter DefaultValue="true" Name="IsActive" Type="Boolean" />
+        </SelectParameters>
+    </asp:SqlDataSource>
     </form>
 </body>
 </html>
