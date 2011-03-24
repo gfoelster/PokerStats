@@ -63,12 +63,18 @@
         </script>
     </head>
     <body>
+     <form id="form1" runat="server">
     <h2>
         Welcome to Pokerstats!
     </h2>
+    <p>
+        <asp:Button ID="LogoutButton" runat="server" Text="Logout" 
+            onclick="LogoutButton_Click" />
+    </p>
         <div id="eins" style="width: 80%; height: 80%; border: dashed 1px;">
             <input type="button" onclick="doIt();" value="Mach was!"/>
         </div>
+        </form>
     </body>
 </html>
 
