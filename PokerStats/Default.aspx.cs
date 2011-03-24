@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using PokerStats.Tools;
 
 namespace PokerStats
 {
@@ -14,7 +15,7 @@ namespace PokerStats
 
             var ctx = new DAL.PokerDBDataContext();
             List<DAL.ActionType> x = ctx.ActionTypes.ToList();
-            
+           
             //DAL.User u = new DAL.User()
             //{
             //    Name = "Jeff",
@@ -22,6 +23,9 @@ namespace PokerStats
             //};
             //ctx.Users.InsertOnSubmit(u);
             //ctx.SubmitChanges();
+
+            List<DAL.ActionType> x  = ctx.ActionTypes.ToList();
+
         }
     }
 }
