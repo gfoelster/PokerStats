@@ -18,5 +18,36 @@ namespace PokerStats
         {
             DebugLabel.Text = GamesList.SelectedIndex.ToString();
         }
+
+        protected void CreateButton_Click(object sender, EventArgs e)
+        {
+            var ctx = new DAL.PokerDBDataContext();
+
+            List<DAL.Game> gamelist = ctx.Games.ToList();       // check if Name of new game is already in use
+            Boolean exists = false;
+            for (int i = 0; i < gamelist.Count; i++)
+            {
+                exists = exists || (gamelist.ElementAt(i).Name == NewGameName.Text);
+            }
+
+            DebugLabel.Text = exists.ToString();
+
+            if (!exists)
+            {
+                DAL.Game newgame = new DAL.Game();
+                newgame.Name = NewGameName.Text;
+                newgame.IsActive = true;
+                newgame.StartTime = DateTime.Now;
+                ctx.Games.InsertOnSubmit(newgame);
+                ctx.SubmitChanges();
+                return;
+            }
+
+
+            
+            DebugLabel.Text="Der Name ist leider schon vergeben, bitte wähle einen neuen.";
+ 
+        }
+
     }
 }

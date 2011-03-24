@@ -25,8 +25,9 @@
     </asp:SqlDataSource>
     <hr />
     <p>
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-        <asp:Button ID="Button1" runat="server" Text="Erstellen" />
+        <asp:TextBox ID="NewGameName" runat="server" >NewGame</asp:TextBox>
+        <asp:Button ID="CreateButton" runat="server" Text="Erstellen" 
+            onclick="CreateButton_Click" />
     </p>
     <p>
         <asp:Label ID="DebugLabel" runat="server" Text="Label"></asp:Label>
