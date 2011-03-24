@@ -124,6 +124,7 @@
   <ItemGroup>
     <Compile Include="GameLobby.aspx.cs">
       <DependentUpon>GameLobby.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="GameLobby.aspx.designer.cs">
       <DependentUpon>GameLobby.aspx</DependentUpon>
