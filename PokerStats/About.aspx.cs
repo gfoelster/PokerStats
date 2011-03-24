@@ -13,6 +13,7 @@ namespace PokerStats
         {
             // Comment
             // new comment
+            // very new comment
         }
     }
 }
