@@ -52,6 +52,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GameLobby.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="cards\10c.png" />
     <Content Include="cards\10d.png" />
@@ -121,6 +122,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameLobby.aspx.cs">
+      <DependentUpon>GameLobby.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GameLobby.aspx.designer.cs">
+      <DependentUpon>GameLobby.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

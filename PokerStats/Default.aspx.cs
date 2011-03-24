@@ -24,7 +24,7 @@ namespace PokerStats
             //ctx.Users.InsertOnSubmit(u);
             //ctx.SubmitChanges();
 
-            List<DAL.ActionType> x  = ctx.ActionTypes.ToList();
+            
 
         }
     }
