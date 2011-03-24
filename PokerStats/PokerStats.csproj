@@ -106,6 +106,7 @@
     <Content Include="cards\Qs.png" />
     <Content Include="cards\test.txt" />
     <Content Include="GameLobby.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -123,9 +124,17 @@
   <ItemGroup>
     <Compile Include="GameLobby.aspx.cs">
       <DependentUpon>GameLobby.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="GameLobby.aspx.designer.cs">
       <DependentUpon>GameLobby.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="DAL\PokerDB.designer.cs">
       <AutoGen>True</AutoGen>
