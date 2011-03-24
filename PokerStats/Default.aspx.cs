@@ -12,8 +12,9 @@ namespace PokerStats
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //var ctx = new DAL.PokerDBDataContext();
-
+            var ctx = new DAL.PokerDBDataContext();
+            List<DAL.ActionType> x = ctx.ActionTypes.ToList();
+            
             //DAL.User u = new DAL.User()
             //{
             //    Name = "Jeff",
