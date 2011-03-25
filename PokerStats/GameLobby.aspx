@@ -12,17 +12,14 @@
     <h1>Wilkommen in der Pokerstats Lobby</h1>
         <p>Bitte wähle ein Spiel aus, oder eröffne ein neues.</p>
     </div>
-    <asp:ListBox ID="GamesList" runat="server" DataSourceID="Pokerstats" 
+    <asp:ListBox ID="GamesList" runat="server" 
         DataTextField="Name" DataValueField="Name" 
         onselectedindexchanged="GamesList_SelectedIndexChanged" 
         AutoPostBack="True"></asp:ListBox>
-    <asp:SqlDataSource ID="Pokerstats" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:PokerStatsConnectionString %>" 
-        SelectCommand="SELECT [Name] FROM [Games] WHERE ([IsActive] = @IsActive)">
-        <SelectParameters>
-            <asp:Parameter DefaultValue="True" Name="IsActive" Type="Boolean" />
-        </SelectParameters>
-    </asp:SqlDataSource>
+   
+   <!-- Jeff: Sorry die DataSource musste gekillt werden -->
+
+
     <hr />
     <p>
         <asp:TextBox ID="NewGameName" runat="server" >NewGame</asp:TextBox>

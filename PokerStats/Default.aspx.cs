@@ -14,7 +14,7 @@ namespace PokerStats
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string xx = HttpContext.Current.User.Identity.Name;
+           
         }
 
         protected void LogoutButton_Click(object sender, EventArgs e)

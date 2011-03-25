@@ -28,7 +28,7 @@ namespace PokerStats.Account
             if (ctx.Users.Any(u => u.Login == login && u.PasswordHash == passwordHash))
             {
                 FormsAuthentication.SetAuthCookie(login, RememberMe.Checked);
-                Response.Redirect("~/Default.aspx");
+                Response.Redirect("~/GameLobby.aspx");
             }
             else
             {

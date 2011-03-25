@@ -13,6 +13,13 @@ namespace PokerStats
         protected void Page_Load(object sender, EventArgs e)
         {
             DebugLabel.Text = GamesList.SelectedIndex.ToString();
+
+            if (!Page.IsPostBack)
+            {
+                GamesList.DataSource = DataAccessProvider.Current.GetActiveGames();
+                GamesList.DataBind();
+
+            }
         }
 
         protected void GamesList_SelectedIndexChanged(object sender, EventArgs e)
@@ -25,12 +32,10 @@ namespace PokerStats
             // CHANGE Jeff
             // Alles ins DataAccess Projekt ausgelagert
 
-            DataAccessProvider dap = new DataAccessProvider();
-
             string gameName = NewGameName.Text.Trim();
-            if (!String.IsNullOrEmpty(gameName) && !dap.GameNameExists(gameName))
+            if (!String.IsNullOrEmpty(gameName) && !DataAccessProvider.Current.GameNameExists(gameName))
             {
-               int newGameID = dap.StartNewGame(gameName, HttpContext.Current.User.Identity.Name);
+                int newGameID = DataAccessProvider.Current.StartNewGame(gameName, HttpContext.Current.User.Identity.Name);
                
                 //Response.Redirect("~/Game?id=" + newGameID);
             }
