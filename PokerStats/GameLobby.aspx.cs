@@ -22,31 +22,46 @@ namespace PokerStats
 
         protected void CreateButton_Click(object sender, EventArgs e)
         {
-            var ctx = new PokerDBDataContext();
+            // CHANGE Jeff
+            // Alles ins DataAccess Projekt ausgelagert
 
-            List<Game> gamelist = ctx.Games.ToList();       // check if Name of new game is already in use
-            Boolean exists = false;
-            for (int i = 0; i < gamelist.Count; i++)
+            DataAccessProvider dap = new DataAccessProvider();
+
+            string gameName = NewGameName.Text.Trim();
+            if (!String.IsNullOrEmpty(gameName) && !dap.GameNameExists(gameName))
             {
-                exists = exists || (gamelist.ElementAt(i).Name == NewGameName.Text);
+               int newGameID = dap.StartNewGame(gameName, HttpContext.Current.User.Identity.Name);
+               
+                //Response.Redirect("~/Game?id=" + newGameID);
             }
+            else
+                DebugLabel.Text = "Der Name ist leider schon vergeben, bitte wähle einen neuen.";
 
-            DebugLabel.Text = exists.ToString();
+            //var ctx = new PokerDBDataContext();
 
-            if (!exists)
-            {
-                Game newgame = new Game();
-                newgame.Name = NewGameName.Text;
-                newgame.IsActive = true;
-                newgame.StartTime = DateTime.Now;
-                ctx.Games.InsertOnSubmit(newgame);
-                ctx.SubmitChanges();
-                return;
-            }
+            //List<Game> gamelist = ctx.Games.ToList();       // check if Name of new game is already in use
+            //Boolean exists = false;
+            //for (int i = 0; i < gamelist.Count; i++)
+            //{
+            //    exists = exists || (gamelist.ElementAt(i).Name == NewGameName.Text);
+            //}
+
+            //DebugLabel.Text = exists.ToString();
+
+            //if (!exists)
+            //{
+            //    Game newgame = new Game();
+            //    newgame.Name = NewGameName.Text;
+            //    newgame.IsActive = true;
+            //    newgame.StartTime = DateTime.Now;
+            //    ctx.Games.InsertOnSubmit(newgame);
+            //    ctx.SubmitChanges();
+            //    return;
+            //}
 
 
             
-            DebugLabel.Text="Der Name ist leider schon vergeben, bitte wähle einen neuen.";
+            //DebugLabel.Text="Der Name ist leider schon vergeben, bitte wähle einen neuen.";
  
         }
 

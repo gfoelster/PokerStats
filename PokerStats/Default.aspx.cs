@@ -14,11 +14,7 @@ namespace PokerStats
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            var ctx = new PokerDBDataContext();
-            List<ActionType> x = ctx.ActionTypes.ToList();
-
-            
+            string xx = HttpContext.Current.User.Identity.Name;
         }
 
         protected void LogoutButton_Click(object sender, EventArgs e)

@@ -17,6 +17,7 @@
       <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="GameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsCommitted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="ActionType_GameAction" Member="ActionType" ThisKey="ActionTypeID" OtherKey="ID" Type="ActionType" IsForeignKey="true" />
       <Association Name="Game_GameAction" Member="Game" ThisKey="GameID" OtherKey="ID" Type="Game" IsForeignKey="true" />
       <Association Name="User_GameAction" Member="User" ThisKey="UserID" OtherKey="ID" Type="User" IsForeignKey="true" />

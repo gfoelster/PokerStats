@@ -243,6 +243,8 @@ namespace PokerStatsDataAccess
 		
 		private int _GameID;
 		
+		private bool _IsCommitted;
+		
 		private EntityRef<ActionType> _ActionType;
 		
 		private EntityRef<Game> _Game;
@@ -269,6 +271,8 @@ namespace PokerStatsDataAccess
     partial void OnTimestampChanged();
     partial void OnGameIDChanging(int value);
     partial void OnGameIDChanged();
+    partial void OnIsCommittedChanging(bool value);
+    partial void OnIsCommittedChanged();
     #endregion
 		
 		public GameAction()
@@ -447,6 +451,26 @@ namespace PokerStatsDataAccess
 					this._GameID = value;
 					this.SendPropertyChanged("GameID");
 					this.OnGameIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsCommitted", DbType="Bit NOT NULL")]
+		public bool IsCommitted
+		{
+			get
+			{
+				return this._IsCommitted;
+			}
+			set
+			{
+				if ((this._IsCommitted != value))
+				{
+					this.OnIsCommittedChanging(value);
+					this.SendPropertyChanging();
+					this._IsCommitted = value;
+					this.SendPropertyChanged("IsCommitted");
+					this.OnIsCommittedChanged();
 				}
 			}
 		}
