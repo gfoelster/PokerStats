@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PokerStats.Tools;
 using System.Web.Security;
+using PokerStatsDataAccess;
 
 namespace PokerStats.Account
 {
@@ -19,7 +20,7 @@ namespace PokerStats.Account
         protected void LoginButton_Click(object sender, EventArgs e)
         {
             ErrorLabel.Visible = false;
-            var ctx = new DAL.PokerDBDataContext();
+            var ctx = new PokerDBDataContext();
 
             string login = UserName.Text.Trim();
             string passwordHash = EncryptionHelper.EncryptString(Password.Text.Trim());

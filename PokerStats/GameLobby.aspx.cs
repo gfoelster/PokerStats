@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using PokerStatsDataAccess;
 
 namespace PokerStats
 {
@@ -21,9 +22,9 @@ namespace PokerStats
 
         protected void CreateButton_Click(object sender, EventArgs e)
         {
-            var ctx = new DAL.PokerDBDataContext();
+            var ctx = new PokerDBDataContext();
 
-            List<DAL.Game> gamelist = ctx.Games.ToList();       // check if Name of new game is already in use
+            List<Game> gamelist = ctx.Games.ToList();       // check if Name of new game is already in use
             Boolean exists = false;
             for (int i = 0; i < gamelist.Count; i++)
             {
@@ -34,7 +35,7 @@ namespace PokerStats
 
             if (!exists)
             {
-                DAL.Game newgame = new DAL.Game();
+                Game newgame = new Game();
                 newgame.Name = NewGameName.Text;
                 newgame.IsActive = true;
                 newgame.StartTime = DateTime.Now;

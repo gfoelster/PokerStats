@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PokerStats.Tools;
 using System.Web.Security;
+using PokerStatsDataAccess;
 
 namespace PokerStats
 {
@@ -14,8 +15,8 @@ namespace PokerStats
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            var ctx = new DAL.PokerDBDataContext();
-            List<DAL.ActionType> x = ctx.ActionTypes.ToList();
+            var ctx = new PokerDBDataContext();
+            List<ActionType> x = ctx.ActionTypes.ToList();
 
             
         }
