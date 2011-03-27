@@ -5,11 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-    <h1>Wilkommen in der Pokerstats Lobby</h1>
+    <h1>Willkommen in der Pokerstats Lobby</h1>
         <p>Bitte wähle ein Spiel aus, oder eröffne ein neues.</p>
     </div>
     <asp:ListBox ID="GamesList" runat="server" 
@@ -28,6 +29,10 @@
     </p>
     <p>
         <asp:Label ID="DebugLabel" runat="server" Text="Label"></asp:Label>
+
+
+        <asp:Button ID="LogoutButton" runat="server" Text="Logout" 
+            onclick="LogoutButton_Click" />
     </p>
     </form>
 </body>

@@ -106,6 +106,7 @@
     <Content Include="cards\Qs.png" />
     <Content Include="cards\test.txt" />
     <Content Include="GameLobby.aspx" />
+    <Content Include="Images\background.jpg" />
     <Content Include="Login.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />

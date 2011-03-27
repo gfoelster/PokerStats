@@ -13,31 +13,50 @@
     </h2>
 
        <p>
-            <span>Login:</span>
-            <asp:TextBox ID="UserName" runat="server" CssClass="textEntry"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" 
+            <table>
+                <tr>
+                    <td>Login:</td>
+                    <td>
+                        <asp:TextBox ID="UserName" runat="server" CssClass="textEntry"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" 
                                 CssClass="failureNotification" ErrorMessage="Bitte Login angeben." ToolTip="Bitte Login angeben." 
                                 ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Passwort:</td>
+                    <td>
+                        <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
+                            CssClass="failureNotification" ErrorMessage="Bitte Passwort angeben." ToolTip="Bitte Passwort angeben." 
+                            ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:ValidationSummary ID="LoginUserValidationSummary" runat="server" CssClass="failureNotification" 
+                                                ValidationGroup="LoginUserValidationGroup"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                           <asp:CheckBox ID="RememberMe" runat="server" Text="Eingeloggt bleiben" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                           <asp:Button ID="LoginButton" runat="server" Text="Log In" CssClass="loginButton"
+                            ValidationGroup="LoginUserValidationGroup" onclick="LoginButton_Click"/>
+                    </td>
+                </tr>
+            </table>
+         
+            
        </p>
-       <p>
-            <span>Passwort:</span>
-            <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
-                    CssClass="failureNotification" ErrorMessage="Bitte Passwort angeben." ToolTip="Bitte Passwort angeben." 
-                    ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
-       </p>
-       <p>
-          <asp:ValidationSummary ID="LoginUserValidationSummary" runat="server" CssClass="failureNotification" 
-                     ValidationGroup="LoginUserValidationGroup"/>
-        </p>
-        <p>
-            <asp:CheckBox ID="RememberMe" runat="server"/>
-            <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Eingeloggt bleiben</asp:Label>
-        </p>
-        <p>
-            <asp:Button ID="LoginButton" runat="server" Text="Log In" 
-            ValidationGroup="LoginUserValidationGroup" onclick="LoginButton_Click"/>
-        </p>
+      
+    
         <p>
             <asp:Label ID="ErrorLabel" runat="server" Visible="false" CssClass="failureNotification" 
                Text="Einloggen fehlgeschlagen. Bitte überprüfe Login und Passwort."></asp:Label>

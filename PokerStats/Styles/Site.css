@@ -3,12 +3,13 @@
 
 body   
 {
-    background: #b6b7bc;
+    background-image: url(../Images/background.jpg);
+    background-color:Green;
     font-size: .80em;
     font-family: "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
     margin: 0px;
-    padding: 0px;
-    color: #696969;
+    padding: 10px;
+    color: White;
 }
 
 a:link, a:visited
@@ -40,7 +41,7 @@ p
 h1, h2, h3, h4, h5, h6
 {
     font-size: 1.5em;
-    color: #666666;
+    color: White;
     font-variant: small-caps;
     text-transform: none;
     font-weight: 200;
@@ -291,4 +292,9 @@ div.accountInfo
 {
     text-align: right;
     padding-right: 10px;
+}
+
+.loginButton
+{
+    margin: 15px 0px 0px 0px;
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using PokerStatsDataAccess;
+using System.Web.Security;
 
 namespace PokerStats
 {
@@ -25,6 +26,12 @@ namespace PokerStats
         protected void GamesList_SelectedIndexChanged(object sender, EventArgs e)
         {
             DebugLabel.Text = GamesList.SelectedIndex.ToString();
+        }
+
+        protected void LogoutButton_Click(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            FormsAuthentication.RedirectToLoginPage();
         }
 
         protected void CreateButton_Click(object sender, EventArgs e)
