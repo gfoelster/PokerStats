@@ -77,5 +77,24 @@ namespace PokerStatsDataAccess
 
             return gameID;
         }
+
+        public List<GameAction> GetUncommittedActions()
+        {
+            List<GameAction> uncommittedActions = ctx.GameActions.Where(ga => !ga.IsCommitted)
+                                                                 .OrderBy(ga => ga.ID)
+                                                                 .ToList();
+            return uncommittedActions;
+        }
+
+        private bool ValidateAction(GameAction action, List<Game> activeGames)
+        {
+            if (activeGames.Any(g => g.ID == action.GameID))
+                return true;
+            else
+            {
+                // commit or delete action???
+                return false;
+            }
+        }
     }
 }
