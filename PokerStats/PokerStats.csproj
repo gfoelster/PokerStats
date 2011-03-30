@@ -105,6 +105,7 @@
     <Content Include="cards\Qh.png" />
     <Content Include="cards\Qs.png" />
     <Content Include="cards\test.txt" />
+    <Content Include="Game.aspx" />
     <Content Include="GameLobby.aspx" />
     <Content Include="Images\background.jpg" />
     <Content Include="Login.aspx" />
@@ -125,6 +126,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game.aspx.cs">
+      <DependentUpon>Game.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game.aspx.designer.cs">
+      <DependentUpon>Game.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GameLobby.aspx.cs">
       <DependentUpon>GameLobby.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

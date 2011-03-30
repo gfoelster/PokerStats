@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PokerStatsDataAccess;
 using System.Web.Security;
+using System.Diagnostics;
 
 namespace PokerStats
 {
@@ -25,7 +26,10 @@ namespace PokerStats
 
         protected void GamesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DebugLabel.Text = GamesList.SelectedIndex.ToString();
+            String selectedName = GamesList.SelectedItem.Value;
+            int gameID = DataAccessProvider.Current.GetActiveGames().Single(g => g.Name == selectedName).ID;
+            DebugLabel.Text =  gameID.ToString();
+            Response.Redirect("~/Game.aspx?id=" + gameID);
         }
 
         protected void LogoutButton_Click(object sender, EventArgs e)
@@ -43,8 +47,9 @@ namespace PokerStats
             if (!String.IsNullOrEmpty(gameName) && !DataAccessProvider.Current.GameNameExists(gameName))
             {
                 int newGameID = DataAccessProvider.Current.StartNewGame(gameName, HttpContext.Current.User.Identity.Name);
-               
-                //Response.Redirect("~/Game?id=" + newGameID);
+
+                Debug.WriteLine(newGameID);
+                Response.Redirect("~/Game.aspx?id=" + newGameID);
             }
             else
                 DebugLabel.Text = "Der Name ist leider schon vergeben, bitte wähle einen neuen.";
