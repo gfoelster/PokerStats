@@ -25,9 +25,12 @@ namespace PokerStats
 
         protected void GamesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            String selectedName = GamesList.SelectedItem.Value;
-            int gameID = DataAccessProvider.Current.GetActiveGames().Single(g => g.Name == selectedName).ID;
+            int gameID = Convert.ToInt32(GamesList.SelectedItem.Value);
+
+            
             DebugLabel.Text =  gameID.ToString();
+            
+            
             Response.Redirect("~/Game.aspx?id=" + gameID);
         }
 
@@ -52,34 +55,6 @@ namespace PokerStats
             }
             else
                 DebugLabel.Text = "Der Name ist leider schon vergeben, bitte wähle einen neuen.";
-
-            //var ctx = new PokerDBDataContext();
-
-            //List<Game> gamelist = ctx.Games.ToList();       // check if Name of new game is already in use
-            //Boolean exists = false;
-            //for (int i = 0; i < gamelist.Count; i++)
-            //{
-            //    exists = exists || (gamelist.ElementAt(i).Name == NewGameName.Text);
-            //}
-
-            //DebugLabel.Text = exists.ToString();
-
-            //if (!exists)
-            //{
-            //    Game newgame = new Game();
-            //    newgame.Name = NewGameName.Text;
-            //    newgame.IsActive = true;
-            //    newgame.StartTime = DateTime.Now;
-            //    ctx.Games.InsertOnSubmit(newgame);
-            //    ctx.SubmitChanges();
-            //    return;
-            //}
-
-
-            
-            //DebugLabel.Text="Der Name ist leider schon vergeben, bitte wähle einen neuen.";
- 
         }
-
     }
 }

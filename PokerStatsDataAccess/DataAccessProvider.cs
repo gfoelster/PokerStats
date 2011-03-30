@@ -28,7 +28,13 @@ namespace PokerStatsDataAccess
             Bet = 3,
             Raise = 4,
             Check = 5,
-            Fold = 6
+            Fold = 6,
+
+            InitialCards = 7, // players 2 cards, who else got cards
+            Flop = 8,
+            Turn = 9,
+            River = 10,
+            YourTurn = 11 // player ID
         };
 
         public DataAccessProvider()
@@ -84,6 +90,13 @@ namespace PokerStatsDataAccess
                                                                  .OrderBy(ga => ga.ID)
                                                                  .ToList();
             return uncommittedActions;
+        }
+
+        public List<GameAction> GetCommittedActions(int gameID, int fromPositionInclusive)
+        {
+            return ctx.GameActions.Where(ga => ga.GameID == gameID && ga.Position >= fromPositionInclusive)
+                                  .OrderBy(ga => ga.Position)
+                                  .ToList();
         }
 
         private bool ValidateAction(GameAction action, List<Game> activeGames)

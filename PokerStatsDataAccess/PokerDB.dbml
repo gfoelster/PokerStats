@@ -19,8 +19,8 @@
   </Table>
   <Table Name="dbo.GameActions" Member="GameActions">
     <Type Name="GameAction">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ActionTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Round" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Data" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />

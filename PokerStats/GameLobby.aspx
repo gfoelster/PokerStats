@@ -14,12 +14,9 @@
         <p>Bitte wähle ein Spiel aus, oder eröffne ein neues.</p>
     </div>
     <asp:ListBox ID="GamesList" runat="server" 
-        DataTextField="Name" DataValueField="Name" 
+        DataTextField="Name" DataValueField="ID" 
         onselectedindexchanged="GamesList_SelectedIndexChanged" 
         AutoPostBack="True"></asp:ListBox>
-   
-   <!-- Jeff: Sorry die DataSource musste gekillt werden -->
-
 
     <hr />
     <p>
