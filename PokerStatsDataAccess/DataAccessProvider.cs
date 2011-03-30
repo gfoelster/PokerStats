@@ -43,7 +43,7 @@ namespace PokerStatsDataAccess
 
         public bool GameNameExists(string gameName)
         {
-            return ctx.Games.Any(g => g.Name == gameName.Trim());
+            return ctx.Games.Any(g => g.Name.ToLower() == gameName.Trim().ToLower());
         }
 
         public int StartNewGame(string gameName, string userLogin)
