@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using PokerStatsDataAccess;
 
 namespace PokerStats
 {
@@ -15,9 +16,31 @@ namespace PokerStats
 
             if (Request.Params["ajax"] != null)
             {
+                //if(Request.Params["gameID"] != null && Request.Params["position"] != null)
+                //{
+                //    int gameID = -1;
+                //    int position = -1;
+
+                //    if(Int32.TryParse(Request.Params["gameID"], out gameID) && (Int32.TryParse(Request.Params["position"], out position)))
+                //    {
+                //        List<GameAction> gameActions = DataAccessProvider.Current.GetCommittedActions(gameID, position);
+                        
+                //        // serialize to string somehow....
+                //        string serialized = "blaaaaa";
+                        
+                //        Response.Write(serialized);
+                //        Response.End();
+                //    }
+                //}
+
+            
+
                 Response.Write(DateTime.Now.ToString());
                 Response.End();
             }
+
+
+         
         }
     }
 }
