@@ -19,13 +19,14 @@ namespace PokerStats
             {
                 GamesList.DataSource = DataAccessProvider.Current.GetActiveGames();
                 GamesList.DataBind();
-
             }
         }
 
         protected void GamesList_SelectedIndexChanged(object sender, EventArgs e)
         {
             DebugLabel.Text = GamesList.SelectedIndex.ToString();
+
+            
         }
 
         protected void LogoutButton_Click(object sender, EventArgs e)
@@ -44,7 +45,7 @@ namespace PokerStats
             {
                 int newGameID = DataAccessProvider.Current.StartNewGame(gameName, HttpContext.Current.User.Identity.Name);
                
-                //Response.Redirect("~/Game?id=" + newGameID);
+                Response.Redirect("~/Game.aspx?id=" + newGameID);
             }
             else
                 DebugLabel.Text = "Der Name ist leider schon vergeben, bitte wähle einen neuen.";
