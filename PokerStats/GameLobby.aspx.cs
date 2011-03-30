@@ -20,7 +20,6 @@ namespace PokerStats
             {
                 GamesList.DataSource = DataAccessProvider.Current.GetActiveGames();
                 GamesList.DataBind();
-
             }
         }
 
