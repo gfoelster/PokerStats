@@ -65,9 +65,9 @@ namespace PokerStatsDataAccess
 
             return gameID;
         }
-        public string GetGameName(int gameID)
+        public Game GetGameByID(int gameID)
         {
-            return ctx.Games.Single(g => g.ID == gameID).Name;
+            return ctx.Games.Single(g => g.ID == gameID);
         }
 
         public List<GameAction> GetUncommittedActions()
@@ -84,36 +84,46 @@ namespace PokerStatsDataAccess
                                   .ToList();
         }
 
-        public int GetUserCountInGame(int gameID)
+        public List<int> GetUsersInGame(Game game)
         {
             // check if at least two users have joined and did not leave again ;)
-
-            Game game = ctx.Games.Single(g => g.ID == gameID);
-
-            if (game.IsActive)
+           
+            // get all committed leave and join actions
+            List<GameAction> joinLeaveActions = ctx.GameActions.Where(ga => (ga.ActionTypeID == (int)ActionTypes.UserJoined ||
+                                                                    ga.ActionTypeID == (int)ActionTypes.UserLeft))
+                                                                    .OrderBy(ga => ga.Position)
+                                                                    .ToList();
+            HashSet<int> joinedUsers = new HashSet<int>();
+            foreach (GameAction ga in joinLeaveActions)
             {
-                // get all committed leave and join actions
-                List<GameAction> joinLeaveActions = ctx.GameActions.Where(ga => (ga.ActionTypeID == (int)ActionTypes.UserJoined ||
-                                                                       ga.ActionTypeID == (int)ActionTypes.UserLeft))
-                                                                       .OrderBy(ga => ga.Position)
-                                                                       .ToList();
-                HashSet<int> joinedUsers = new HashSet<int>();
-                foreach (GameAction ga in joinLeaveActions)
-                {
-                    if (!ga.UserID.HasValue)
-                        throw new Exception("UserID cannot be null in UserJoined and UserLeft actions.");
+                if (!ga.UserID.HasValue)
+                    throw new Exception("UserID cannot be null in UserJoined and UserLeft actions.");
 
-                    if (ga.ActionTypeID == (int)ActionTypes.UserJoined)
-                        joinedUsers.Add(ga.UserID.Value);
-                    else
-                        joinedUsers.Remove(ga.UserID.Value);
-                }
-
-                return joinedUsers.Count;
+                if (ga.ActionTypeID == (int)ActionTypes.UserJoined)
+                    joinedUsers.Add(ga.UserID.Value);
+                else
+                    joinedUsers.Remove(ga.UserID.Value);
             }
-            else
-                return 0;
+
+            return joinedUsers.ToList();
         }
+        public int GetFreeSeat(Game game, List<int> joinedUsers)
+        {
+            var reservedSeats = (from ga in ctx.GameActions
+					            where ga.ActionTypeID == 1 && ga.IsCommitted
+					            group ga by ga.UserID.Value into userJoins
+					            select new
+					            {
+						            UserID = userJoins.Key,
+						            Seat = userJoins.Single(uj => uj.Position == userJoins.Max(uu => uu.Position)).Data
+					            }).ToList();
+
+            
+
+            return 1;
+            //ctx.GameActions.Where(ga => ga.ActionTypeID == (int)ActionTypes.UserJoined)
+        }
+
         private bool ValidateAction(GameAction action, List<Game> activeGames)
         {
             if (activeGames.Any(g => g.ID == action.GameID))

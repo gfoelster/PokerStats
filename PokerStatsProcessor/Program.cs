@@ -33,8 +33,6 @@ namespace PokerStatsProcessor
 
         private static void LoadActions()
         {
-            
-
             while (true)
             {
                 if (evt.WaitOne(1))
@@ -62,39 +60,44 @@ namespace PokerStatsProcessor
 
         private static void ProcessActions(int gameID, List<GameAction> actions)
         {
-            Console.WriteLine(String.Format("Game: {0}", ctx.GetGameName(gameID)));
+            Game game = ctx.GetGameByID(gameID);
+
+            Console.WriteLine(String.Format("Game: {0}", game.Name));
+
+            
 
             foreach (GameAction action in actions)
             {
                 switch (action.ActionTypeID)
                 {
-                    case (int)ActionTypes.UserJoined : UserJoined(gameID, action); break;
+                    case (int)ActionTypes.UserJoined : UserJoined(game, action); break;
 
-                    case (int)ActionTypes.UserLeft: UserLeft(gameID, action); break;
+                    case (int)ActionTypes.UserLeft: UserLeft(game, action); break;
 
                     default: throw new NotSupportedException(String.Format("This action (ID: {0}) is not supported.", action.ActionTypeID));
                 }
             }
         }
 
-        private static void UserLeft(int gameID, GameAction action)
+        private static void UserLeft(Game game, GameAction action)
         {
             throw new NotImplementedException();
         }
 
-        private static void UserJoined(int gameID, GameAction action)
+        private static void UserJoined(Game game, GameAction action)
         {
             Console.WriteLine("User joined.");
 
             // how many users are in the game?
-            int usersInGame = ctx.GetUserCountInGame(gameID);
+            List<int> usersInGame = ctx.GetUsersInGame(game);
 
-
-            if (usersInGame == 0)
+            if (usersInGame.Count == 0)
             {
                 // wait for one more user to start
+                int freeSeat = ctx.GetFreeSeat(game, usersInGame);                  
+
             }
-            else if (usersInGame == 1)
+            else if (usersInGame.Count == 1)
             {
                 // you are the second user, start the game
             }
