@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 using PokerStatsDataAccess;
 
 namespace PokerStats
@@ -16,6 +17,11 @@ namespace PokerStats
 
             if (Request.Params["ajax"] != null)
             {
+                int cardNumber = Convert.ToInt32(Request.Params["card"]);
+                Debug.WriteLine(cardNumber);
+                Response.Write("./cards/"+cardNumber+"h.png");
+                Response.Write(",");
+
                 //if(Request.Params["gameID"] != null && Request.Params["position"] != null)
                 //{
                 //    int gameID = -1;
