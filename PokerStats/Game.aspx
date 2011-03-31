@@ -8,6 +8,8 @@
     <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
             <script type="text/javascript">
          <!--
+                var aktiv = window.setInterval("doIt()", 1000);
+                var cardnumber = 0;
                 function doIt() {
 
                     //erstellen des requests
@@ -35,7 +37,8 @@
 
                     //anfrage erstellen (GET, url ist localhost,
                     //request ist asynchron      
-                    req.open("GET", 'game.aspx?ajax=true', true);
+                    req.open("GET", 'game.aspx?ajax=true&card=' + ((cardnumber % 9) + 2), true);
+                    cardnumber++;
 
                     //Beim abschliessen des request wird diese Funktion ausgeführt
                     req.onreadystatechange = function () {
@@ -45,9 +48,11 @@
                                     alert("Fehler: " + req.status);
                                 } else {
                                     //alert("Status ist: " + req.status);
-                                    //schreibe die antwort in den div container mit der id content 
+                                    //schreibe die antwort in den div container mit der id content
+                                    var myResponse = req.responseText.split(",")
+                                    document.getElementById("img1").src = myResponse[0];
                                     document.getElementById('Label1').innerHTML = '<strong>' +
-                                                                        req.responseText
+                                                                        myResponse[1]
                                                                         + '</strong>';
                                 }
                                 break;
@@ -73,7 +78,8 @@
         <br />
     </div>
     <p>
-        <input id="Button1" type="button" value="button" onclick="return doIt()" /></p>
+        <input id="Button1" type="button" value="button" onclick="return doIt()" />
+        <img id="img1" alt="" src="" style="width: 108px" /></p>
     </form>
 </body>
 </html>
