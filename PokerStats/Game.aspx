@@ -73,13 +73,41 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+    <div style="text-align: center">
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-        <br />
     </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div style="height: 438px; text-align: center; z-index: 1; left: 10px; top: 174px; position: absolute; width: 1223px;">
+            <br />
+            <br />
+            <img id="table" alt="" src="Images/tablev2.png" 
+            style="width: 723px; height: 352px; text-align: center;" />
+            <div style="z-index: 1; left: 263px; top: -481px; position: relative; height: 172px; width: 135px; text-align: left">
+                <img id="avatar" alt="" src="Images/anonymous_avatar.gif" 
+                    style="height: 40px; width: 37px; " />
+            <span style="text-align: left"> Anonymous <br />
+                   Chips: 
+            </span>
+            </div>
+            <img id="card1" alt="" src="cards/3c.png" 
+                
+                style="z-index: 1; left: 268px; top: -5px; position: absolute; height: 80px; width: 57px; right: 898px;" /><img 
+                id="card2" alt="" src="cards/3s.png" 
+                
+                style="z-index: 1; left: 333px; top: -6px; position: absolute; height: 80px; width: 57px" /></div>
+        <br />
     <p>
         <input id="Button1" type="button" value="button" onclick="return doIt()" />
-        <img id="img1" alt="" src="" style="width: 108px" /></p>
+        </p>
     </form>
 </body>
 </html>

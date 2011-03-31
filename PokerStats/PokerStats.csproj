@@ -107,7 +107,10 @@
     <Content Include="cards\test.txt" />
     <Content Include="Game.aspx" />
     <Content Include="GameLobby.aspx" />
+    <Content Include="Images\anonymous_avatar.gif" />
     <Content Include="Images\background.jpg" />
+    <Content Include="Images\table.png" />
+    <Content Include="Images\tablev2.png" />
     <Content Include="Login.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />

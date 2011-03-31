@@ -3,13 +3,14 @@
 
 body   
 {
-    background-image: url(../Images/background.jpg);
+    background-image: url('../Images/background.jpg');
     background-color:Green;
     font-size: .80em;
     font-family: "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
     margin: 0px;
     padding: 10px;
     color: White;
+    text-align: center;
 }
 
 a:link, a:visited
