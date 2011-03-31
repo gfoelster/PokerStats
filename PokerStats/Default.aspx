@@ -4,7 +4,7 @@
     <head>
         <title>Pokerstats</title>
         <script type="text/javascript">
-         <!--
+      
             function doIt() {
 
                 //erstellen des requests
@@ -59,7 +59,7 @@
                                       "application/x-www-form-urlencoded");
                 req.send(null);
             }
-         //-->
+
         </script>
     </head>
     <body>

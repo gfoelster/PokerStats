@@ -469,7 +469,7 @@ namespace PokerStatsDataAccess
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int ID
 		{
 			get
@@ -489,7 +489,7 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Position", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Position", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
 		public int Position
 		{
 			get
