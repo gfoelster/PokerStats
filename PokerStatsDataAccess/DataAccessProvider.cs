@@ -21,22 +21,6 @@ namespace PokerStatsDataAccess
             }
         }
 
-        public enum ActionTypes 
-        { 
-            UserJoined = 1,
-            UserLeft = 2,
-            Bet = 3,
-            Raise = 4,
-            Check = 5,
-            Fold = 6,
-
-            InitialCards = 7, // players 2 cards, who else got cards
-            Flop = 8,
-            Turn = 9,
-            River = 10,
-            YourTurn = 11 // player ID
-        };
-
         public DataAccessProvider()
         {
 
@@ -46,12 +30,10 @@ namespace PokerStatsDataAccess
         {
             return ctx.Games.Where(g => g.IsActive).ToList();
         }
-
         public bool GameNameExists(string gameName)
         {
             return ctx.Games.Any(g => g.Name.ToLower() == gameName.Trim().ToLower());
         }
-
         public int StartNewGame(string gameName, string userLogin)
         {
             User user = ctx.Users.Single(u => u.Login == userLogin);
@@ -83,6 +65,10 @@ namespace PokerStatsDataAccess
 
             return gameID;
         }
+        public string GetGameName(int gameID)
+        {
+            return ctx.Games.Single(g => g.ID == gameID).Name;
+        }
 
         public List<GameAction> GetUncommittedActions()
         {
@@ -91,7 +77,6 @@ namespace PokerStatsDataAccess
                                                                  .ToList();
             return uncommittedActions;
         }
-
         public List<GameAction> GetCommittedActions(int gameID, int fromPositionInclusive)
         {
             return ctx.GameActions.Where(ga => ga.GameID == gameID && ga.Position >= fromPositionInclusive)
@@ -99,6 +84,36 @@ namespace PokerStatsDataAccess
                                   .ToList();
         }
 
+        public int GetUserCountInGame(int gameID)
+        {
+            // check if at least two users have joined and did not leave again ;)
+
+            Game game = ctx.Games.Single(g => g.ID == gameID);
+
+            if (game.IsActive)
+            {
+                // get all committed leave and join actions
+                List<GameAction> joinLeaveActions = ctx.GameActions.Where(ga => (ga.ActionTypeID == (int)ActionTypes.UserJoined ||
+                                                                       ga.ActionTypeID == (int)ActionTypes.UserLeft))
+                                                                       .OrderBy(ga => ga.Position)
+                                                                       .ToList();
+                HashSet<int> joinedUsers = new HashSet<int>();
+                foreach (GameAction ga in joinLeaveActions)
+                {
+                    if (!ga.UserID.HasValue)
+                        throw new Exception("UserID cannot be null in UserJoined and UserLeft actions.");
+
+                    if (ga.ActionTypeID == (int)ActionTypes.UserJoined)
+                        joinedUsers.Add(ga.UserID.Value);
+                    else
+                        joinedUsers.Remove(ga.UserID.Value);
+                }
+
+                return joinedUsers.Count;
+            }
+            else
+                return 0;
+        }
         private bool ValidateAction(GameAction action, List<Game> activeGames)
         {
             if (activeGames.Any(g => g.ID == action.GameID))
@@ -110,4 +125,20 @@ namespace PokerStatsDataAccess
             }
         }
     }
+
+    public enum ActionTypes
+    {
+        UserJoined = 1,
+        UserLeft = 2,
+        Bet = 3,
+        Raise = 4,
+        Check = 5,
+        Fold = 6,
+
+        InitialCards = 7, // players 2 cards, who else got cards
+        Flop = 8,
+        Turn = 9,
+        River = 10,
+        YourTurn = 11 // player ID
+    };
 }
