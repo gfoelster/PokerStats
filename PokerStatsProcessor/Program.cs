@@ -47,7 +47,7 @@ namespace PokerStatsProcessor
 
                     foreach (var ga in gameActions)
                     {
-                        List<GameAction> actions = ga.OrderBy(g => g.Position).ToList();
+                        List<GameAction> actions = ga.OrderBy(g => g.ID).ToList();
                         if(actions.Count > 0)
                             ProcessActions(ga.Key, actions);
                     }

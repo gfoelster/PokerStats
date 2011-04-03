@@ -79,8 +79,8 @@ namespace PokerStatsDataAccess
         }
         public List<GameAction> GetCommittedActions(int gameID, int fromPositionInclusive)
         {
-            return ctx.GameActions.Where(ga => ga.GameID == gameID && ga.Position >= fromPositionInclusive)
-                                  .OrderBy(ga => ga.Position)
+            return ctx.GameActions.Where(ga => ga.GameID == gameID && ga.ID >= fromPositionInclusive)
+                                  .OrderBy(ga => ga.ID)
                                   .ToList();
         }
 
@@ -91,7 +91,7 @@ namespace PokerStatsDataAccess
             // get all committed leave and join actions
             List<GameAction> joinLeaveActions = ctx.GameActions.Where(ga => (ga.ActionTypeID == (int)ActionTypes.UserJoined ||
                                                                     ga.ActionTypeID == (int)ActionTypes.UserLeft))
-                                                                    .OrderBy(ga => ga.Position)
+                                                                    .OrderBy(ga => ga.ID)
                                                                     .ToList();
             HashSet<int> joinedUsers = new HashSet<int>();
             foreach (GameAction ga in joinLeaveActions)
@@ -115,7 +115,7 @@ namespace PokerStatsDataAccess
 					            select new
 					            {
 						            UserID = userJoins.Key,
-						            Seat = userJoins.Single(uj => uj.Position == userJoins.Max(uu => uu.Position)).Data
+						            Seat = userJoins.Single(uj => uj.ID == userJoins.Max(uu => uu.ID)).Data
 					            }).ToList();
 
             
