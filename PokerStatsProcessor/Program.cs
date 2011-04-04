@@ -81,27 +81,28 @@ namespace PokerStatsProcessor
 
         private static void UserLeft(Game game, GameAction action)
         {
-            throw new NotImplementedException();
+        
         }
 
         private static void UserJoined(Game game, GameAction action)
         {
             Console.WriteLine("User joined.");
 
+            // place user, commit action
+            ctx.PlaceUserOnFreeSeat(game, action.UserID.Value, action.ID);
+
             // how many users are in the game?
             List<int> usersInGame = ctx.GetUsersInGame(game);
 
-            if (usersInGame.Count == 0)
-            {
-                // wait for one more user to start
-                int freeSeat = ctx.GetFreeSeat(game, usersInGame);                  
-
-            }
-            else if (usersInGame.Count == 1)
+            if (usersInGame.Count == 1)
             {
                 // you are the second user, start the game
+
+                // deal first cards
+                Console.WriteLine("Dealing cards.");
+                ctx.DealPocketCards(game);
             }
-            else
+            else if(usersInGame.Count > 2)
             {
                 // game is already running, take a seat
             }
