@@ -62,12 +62,10 @@ namespace PokerStatsProcessor
         {
             Game game = ctx.GetGameByID(gameID);
 
-            Console.WriteLine(String.Format("Game: {0}", game.Name));
-
-            
-
             foreach (GameAction action in actions)
             {
+                Console.WriteLine(String.Format("Process Action, type: \"{0}\", game: \"{1}\"", action.ToString(), game.Name));
+
                 switch (action.ActionTypeID)
                 {
                     case (int)ActionTypes.UserJoined : UserJoined(game, action); break;
@@ -76,7 +74,11 @@ namespace PokerStatsProcessor
 
                     default: throw new NotSupportedException(String.Format("This action (ID: {0}) is not supported.", action.ActionTypeID));
                 }
+
+                Console.WriteLine();
+
             }
+
         }
 
         private static void UserLeft(Game game, GameAction action)
@@ -86,10 +88,11 @@ namespace PokerStatsProcessor
 
         private static void UserJoined(Game game, GameAction action)
         {
-            Console.WriteLine("User joined.");
+            User user = ctx.GetUserByID(action.UserID.Value);
+            Console.WriteLine(String.Format("{0} joined the game.", user.Name));
 
             // place user, commit action
-            ctx.PlaceUserOnFreeSeat(game, action.UserID.Value, action.ID);
+            ctx.PlaceUserOnFreeSeat(game, user, action.ID);
 
             // how many users are in the game?
             List<int> usersInGame = ctx.GetUsersInGame(game);

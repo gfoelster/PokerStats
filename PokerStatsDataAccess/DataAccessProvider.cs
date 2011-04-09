@@ -123,6 +123,10 @@ namespace PokerStatsDataAccess
             List<int> joinedUsers = ctx.UserSeats.Where(us => us.GameID == game.ID).Select(us => us.UserID).ToList();
             return joinedUsers;
         }
+        public User GetUserByID(int userID)
+        {
+            return ctx.Users.Single(u => u.ID == userID);
+        }
         public int GetFreeSeat(Game game)
         {
             List<int> reservedSeats = ctx.UserSeats.Where(us => us.GameID == game.ID).Select(us => us.Seat).ToList();
@@ -149,23 +153,21 @@ namespace PokerStatsDataAccess
 
 
 
-
-
         #region Game Actions
 
-        public void PlaceUserOnFreeSeat(Game game, int userID, int gameActionID)
+        public void PlaceUserOnFreeSeat(Game game, User user, int gameActionID)
         {
             int freeSeat = GetFreeSeat(game);
             UserSeat seat = new UserSeat()
             {
                 GameID = game.ID,
                 Seat = freeSeat,
-                UserID = userID
+                UserID = user.ID
             };
             ctx.UserSeats.InsertOnSubmit(seat);
             ctx.SubmitChanges();
 
-            Console.WriteLine(String.Format("User is placed on seat {0}.", freeSeat));
+            Console.WriteLine(String.Format("{0} is placed on seat {1}.", user.Name, freeSeat));
 
             GameAction action = ctx.GameActions.Single(ga => ga.ID == gameActionID);
             action.Data = seat.ToString();
@@ -214,7 +216,7 @@ namespace PokerStatsDataAccess
         {
             // the next round begins!
             game.Round++;
-            Console.WriteLine(string.Format("Round {0} begins."));
+            Console.WriteLine(string.Format("Round {0} begins.", game.Round));
 
             // advance button position
             int buttonPosition = game.CurrentButtonPosition;
