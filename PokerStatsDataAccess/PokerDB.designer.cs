@@ -330,7 +330,7 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_GameAction", Storage="_Game", ThisKey="GameID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_GameAction", Storage="_Game", ThisKey="GameID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Game Game
 		{
 			get
@@ -546,7 +546,7 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_UserSeat", Storage="_Game", ThisKey="GameID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_UserSeat", Storage="_Game", ThisKey="GameID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Game Game
 		{
 			get
@@ -651,6 +651,10 @@ namespace PokerStatsDataAccess
 		
 		private System.Nullable<System.DateTime> _EndTime;
 		
+		private int _Round;
+		
+		private int _CurrentButtonPosition;
+		
 		private EntitySet<GameAction> _GameActions;
 		
 		private EntitySet<UserSeat> _UserSeats;
@@ -669,6 +673,10 @@ namespace PokerStatsDataAccess
     partial void OnStartTimeChanged();
     partial void OnEndTimeChanging(System.Nullable<System.DateTime> value);
     partial void OnEndTimeChanged();
+    partial void OnRoundChanging(int value);
+    partial void OnRoundChanged();
+    partial void OnCurrentButtonPositionChanging(int value);
+    partial void OnCurrentButtonPositionChanged();
     #endregion
 		
 		public Game()
@@ -698,7 +706,7 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
 			get
@@ -774,6 +782,46 @@ namespace PokerStatsDataAccess
 					this._EndTime = value;
 					this.SendPropertyChanged("EndTime");
 					this.OnEndTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Round", DbType="Int NOT NULL")]
+		public int Round
+		{
+			get
+			{
+				return this._Round;
+			}
+			set
+			{
+				if ((this._Round != value))
+				{
+					this.OnRoundChanging(value);
+					this.SendPropertyChanging();
+					this._Round = value;
+					this.SendPropertyChanged("Round");
+					this.OnRoundChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentButtonPosition", DbType="Int NOT NULL")]
+		public int CurrentButtonPosition
+		{
+			get
+			{
+				return this._CurrentButtonPosition;
+			}
+			set
+			{
+				if ((this._CurrentButtonPosition != value))
+				{
+					this.OnCurrentButtonPositionChanging(value);
+					this.SendPropertyChanging();
+					this._CurrentButtonPosition = value;
+					this.SendPropertyChanged("CurrentButtonPosition");
+					this.OnCurrentButtonPositionChanged();
 				}
 			}
 		}

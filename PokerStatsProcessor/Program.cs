@@ -96,15 +96,20 @@ namespace PokerStatsProcessor
 
             if (usersInGame.Count == 1)
             {
+                // your are the first user, wait for other players
+                ctx.WaitForPlayers(game, action.UserID.Value);
+            }
+            if (usersInGame.Count == 2)
+            {
                 // you are the second user, start the game
+                ctx.PayBlinds(game);
 
                 // deal first cards
-                Console.WriteLine("Dealing cards.");
                 ctx.DealPocketCards(game);
             }
             else if(usersInGame.Count > 2)
             {
-                // game is already running, take a seat
+                // wait for round to end
             }
         }
     }

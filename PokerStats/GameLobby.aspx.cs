@@ -27,11 +27,12 @@ namespace PokerStats
         {
             int gameID = Convert.ToInt32(GamesList.SelectedItem.Value);
 
+            bool joined = DataAccessProvider.Current.JoinGame(gameID, HttpContext.Current.User.Identity.Name);
             
-            DebugLabel.Text =  gameID.ToString();
-            
-            
-            Response.Redirect("~/Game.aspx?id=" + gameID);
+            if(joined)            
+                Response.Redirect("~/Game.aspx?id=" + gameID);
+            else
+                DebugLabel.Text = "Dieses Spiel ist leider schon voll.";
         }
 
         protected void LogoutButton_Click(object sender, EventArgs e)
