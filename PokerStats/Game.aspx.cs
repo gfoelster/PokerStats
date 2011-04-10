@@ -23,14 +23,17 @@ namespace PokerStats
                 return;
 
 
-            if (Request.Params["ID"] != null && Request.Params["position"] != null && (Request["event"] != null || Request["chat"] != null)) 
+            if (Request.Params["ID"] != null && Request.Params["position"] != null && Request["type"] != null) 
             {
                 int gameID = -1;
                 int position = -1;
 
                 if (Int32.TryParse(Request.Params["ID"], out gameID) && (Int32.TryParse(Request.Params["position"], out position)))
                 {
-                    GetEvents(gameID, position);
+                    if (Request["type"] == "event")
+                        GetEvents(gameID, position);
+                    else if (Request["type"] == "chat")
+                        GetChatMessages(gameID, position);
                 }
             }
             else if (Request.Params["ID"] != null && Request.HttpMethod == "POST")
@@ -60,6 +63,11 @@ namespace PokerStats
             Response.ContentType = "application/json";
             Response.Write(json);
             Response.End();
+        }
+
+        private void GetChatMessages(int gameID, int position)
+        {
+            throw new NotImplementedException();
         }
     }
 }
