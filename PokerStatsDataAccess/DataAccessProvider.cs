@@ -165,9 +165,11 @@ namespace PokerStatsDataAccess
             ctx.SubmitChanges();
         }
 
-        public List<ChatMessage> GetCommittedChatMessages(int gameID, int fromPositionInclusive)
+        public List<ChatMessage> GetCommittedChatMessages(int gameID, int fromPositionInclusive, string filterOutUserLogin)
         {
-            return ctx.ChatMessages.Where(cm => cm.GameID == gameID && cm.ChatMessageID >= fromPositionInclusive)
+            User user = ctx.Users.Single(us => us.Login == filterOutUserLogin);
+
+            return ctx.ChatMessages.Where(cm => cm.GameID == gameID && cm.ChatMessageID >= fromPositionInclusive && cm.UserID != user.UserID)
                                    .OrderBy(cm => cm.ChatMessageID)
                                    .ToList();
         }

@@ -8,9 +8,37 @@
     <script src="Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script type="text/javascript">
          <!--
-        $(document).ready(function () {
-            $("#chatTextArea").text("XXX");
+        $(document).ready(function () 
+        {
+            $("#chatInputArea").keydown(function (e) 
+            {
+                if (e.keyCode == '13') // if 'Enter'...
+                 {
+                    e.preventDefault();
+                    PostChatMessage();
+                }
+            }).focus();
+
+            $("#chatSubmitButton").click(PostChatMessage);
         });
+
+        function PostChatMessage() 
+        {
+             var message = $("#chatInputArea").val();
+             if (message != '')
+             {
+                    $.post("game.aspx?ajax=true&ID=5&position=1", { chatmessage: message });
+                    $("#chatInputArea").val("");
+
+                    var output = $("#chatTextArea");
+
+                    if (output.val() != '')
+                        message = "\n" + message;
+
+                    output.val(output.val() + message)
+                          .scrollTop(output[0].scrollHeight - output.height()); // scroll down 
+             }
+        }
 
         //        var aktiv = window.setInterval("doIt()", 1000);
         var cardnumber = 0;
@@ -48,7 +76,7 @@
              width:100%;
         }
         
-        .chatInputArea
+        #chatInputArea
         {
             margin-top:3px;
             width:250px;
@@ -79,7 +107,7 @@
             position: relative;
             margin-left: auto;
             margin-right: auto;
-            top: 80px; /*border:solid 1px black;*/
+            top: 20px; /*border:solid 1px black;*/
         }
         
         .tableBackground
@@ -239,11 +267,11 @@
 
     <div class="chatArea"> 
         
-        <textarea class="textArea" id="chatTextArea">blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textArea>
+        <textarea class="textArea" id="chatTextArea" readonly="readonly"></textArea>
 
         <br />
-        <input type="text" class="chatInputArea" maxlength="299"/> 
-        <input id="chatSubmitButton" type="button" value="Submit" />
+        <input id="chatInputArea" type="text" maxlength="299"/> 
+        <input id="chatSubmitButton" type="button" value="Senden" />
         <br class="clear" />
     </div>
 </body>

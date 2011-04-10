@@ -12,6 +12,11 @@ body
     color: White;
 }
 
+textarea
+{
+   /* font-family: "Segoe UI", Arial, Helvetica, Verdana, sans-serif;*/
+}
+
 a:link, a:visited
 {
     color: #034af3;

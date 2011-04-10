@@ -36,7 +36,7 @@ namespace PokerStats
                     }
                     else if(Request.HttpMethod == "POST")   // post chat message
                     {
-                        string chatMessage = Request.Form["chat"].Trim();
+                        string chatMessage = Request.Form["chatmessage"].Trim();
                         DataAccessProvider.Current.PostChatMessage(gameID, HttpContext.Current.User.Identity.Name, chatMessage);
                     }
                 }
@@ -63,7 +63,7 @@ namespace PokerStats
 
         private void GetChatMessages(int gameID, int position)
         {
-            List<ChatMessage> chatMessages = DataAccessProvider.Current.GetCommittedChatMessages(gameID, position);
+            List<ChatMessage> chatMessages = DataAccessProvider.Current.GetCommittedChatMessages(gameID, position, HttpContext.Current.User.Identity.Name);
 
             // set linked entities null for serialization
             chatMessages.ForEach((cm) => { cm.User = null; cm.Game = null; });
