@@ -25,7 +25,7 @@
             //                $("#player1Card2").attr("src", splitted[0] + "s.png");
 
             //            });
-            $.getJSON("game.aspx?ajax=true&ID=5&position=1", function (json) {
+            $.getJSON("game.aspx?ajax=true&ID=7&position=1", function (json) {
                 var items = [];
 
                 $.each(json, function (key, val) {
@@ -189,7 +189,6 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
     <div class="tableContainer">
         <img id="table" alt="" src="Images/tablev2.png" class="tableBackground" />
         <div id="player1" class="playerPanel player1">
@@ -257,6 +256,5 @@
         <input id="chatSubmitButton" type="button" value="Submit" />
         <br class="clear" />
     </div>
-    </form>
 </body>
 </html>
