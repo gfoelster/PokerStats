@@ -10,8 +10,8 @@
          <!--
         $(document).ready(function () {
             $("#Label1").text("XXX");
-//            for (var i = 2; i < 9; i++) {
-//                $("div #player" + i).hide("slow");
+            for (var i = 2; i < 9; i++) {
+                $("div #player" + i).hide("slow");
             }
         });
 
