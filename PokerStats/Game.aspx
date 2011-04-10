@@ -10,8 +10,8 @@
          <!--
         $(document).ready(function () {
             $("#Label1").text("XXX");
-            for (var i = 2; i < 9; i++) {
-                $("div #player" + i).hide("slow");
+//            for (var i = 2; i < 9; i++) {
+//                $("div #player" + i).hide("slow");
             }
         });
 
@@ -89,14 +89,13 @@
             top: 80px; /*border:solid 1px black;*/
         }
         
-        
         .tableBackground
         {
+            position:absolute;
             width: 715px;
             height: 334px;
             margin-top:155px;
-            margin-left: auto;
-            margin-right:auto;
+            margin-left: 142px;
         }
         
         .playerPanel
@@ -192,6 +191,7 @@
     <form id="form1" runat="server">
     <div class="tableContainer">
         <img id="table" alt="" src="Images/tablev2.png" class="tableBackground" />
+
         <div id="player1" class="playerPanel player1">
             <img id="player1Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif" />
             <span class="playerName">1 </span><span class="chipStack">Chips: </span>
