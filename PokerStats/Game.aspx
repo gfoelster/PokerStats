@@ -15,15 +15,26 @@
             }
         });
 
-//        var aktiv = window.setInterval("doIt()", 1000);
+        //        var aktiv = window.setInterval("doIt()", 1000);
         var cardnumber = 0;
         function doIt() {
-            cardnumber++;
-            $.get('game.aspx?ajax=true&card=' + ((cardnumber % 9) + 2), function (data) {
-                var splitted = data.split(",");
-                $("#player1Card1").attr("src", splitted[0] + "c.png");
-                $("#player1Card2").attr("src", splitted[0] + "s.png");
+            //            cardnumber++;
+            //            $.get('game.aspx?ajax=true&card=' + ((cardnumber % 9) + 2), function (data) {
+            //                var splitted = data.split(",");
+            //                $("#player1Card1").attr("src", splitted[0] + "c.png");
+            //                $("#player1Card2").attr("src", splitted[0] + "s.png");
 
+            //            });
+            $.getJSON("game.aspx?ajax=true&ID=5&position=1", function (json) {
+                var items = [];
+
+                $.each(json, function (key, val) {
+                    items.push('<li id="' + key + '">' + val + '</li>');
+                });
+                $('<ul/>', {
+                    'class': 'my-new-list',
+                    html: items.join('')
+                }).appendTo('body');
             });
         };
     </script>
