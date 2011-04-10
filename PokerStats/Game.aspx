@@ -9,10 +9,7 @@
     <script type="text/javascript">
          <!--
         $(document).ready(function () {
-            $("#Label1").text("XXX");
-//            for (var i = 2; i < 9; i++) {
-//                $("div #player" + i).hide("slow");
-            }
+            $("#chatTextArea").text("XXX");
         });
 
         //        var aktiv = window.setInterval("doIt()", 1000);
@@ -25,17 +22,13 @@
             //                $("#player1Card2").attr("src", splitted[0] + "s.png");
 
             //            });
-            $.getJSON("game.aspx?ajax=true&ID=7&position=1", function (json) {
-                var items = [];
+            $.getJSON("game.aspx?ajax=true&ID=5&position=1&type=event", function (json) {
+                var items = "";
 
                 $.each(json, function (key, val) {
-                    items.push('<li id="' + key.toString + '">' + val.GameActionID + '</li>');
-                    items.push('<li id="' + key + '">' + val["ActionTypeID"] + '</li>');
+                    items = items + key + "\t" + val.ActionTypeID + "\t" + val.Timestamp + "\n";
                 });
-                $('<ul/>', {
-                    'class': 'my-new-list',
-                    html: items.join('')
-                }).appendTo('body');
+                $("#chatTextArea").val(items);
             });
         };
     </script>
@@ -243,16 +236,13 @@
     <div>
         <input class="clickMeButton" id="Button1" type="button" value="Click me!" onclick="return doIt()" />
     </div>
-    <div style="text-align: center">
-        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-    </div>
 
     <div class="chatArea"> 
         
         <textarea class="textArea" id="chatTextArea"> blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textArea>
 
         <br />
-        <input type="text" class="chatInputArea"/> 
+        <input type="text" class="chatInputArea" maxlength="299"/> 
         <input id="chatSubmitButton" type="button" value="Submit" />
         <br class="clear" />
     </div>
