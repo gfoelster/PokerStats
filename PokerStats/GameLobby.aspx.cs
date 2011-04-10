@@ -14,8 +14,6 @@ namespace PokerStats
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DebugLabel.Text = GamesList.SelectedIndex.ToString();
-
             if (!Page.IsPostBack)
             {
                 GamesList.DataSource = DataAccessProvider.Current.GetActiveGames();
@@ -32,7 +30,7 @@ namespace PokerStats
             if(joined)            
                 Response.Redirect("~/Game.aspx?id=" + gameID);
             else
-                DebugLabel.Text = "Dieses Spiel ist leider schon voll.";
+                ErrorLabel.Text = "Dieses Spiel ist leider schon voll.";
         }
 
         protected void LogoutButton_Click(object sender, EventArgs e)
@@ -55,7 +53,9 @@ namespace PokerStats
                 Response.Redirect("~/Game.aspx?id=" + newGameID);
             }
             else
-                DebugLabel.Text = "Der Name ist leider schon vergeben, bitte wähle einen neuen.";
+            {
+                ErrorLabel.Text = "Der Name ist leider schon vergeben, bitte wähle einen anderen.";
+            }
         }
     }
 }

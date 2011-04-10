@@ -250,10 +250,10 @@
 
     <div class="chatArea"> 
         
-        <textarea class="textArea" id="chatTextArea"> blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textArea>
+        <textarea class="textArea" id="chatTextArea">blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textArea>
 
         <br />
-        <input type="text" class="chatInputArea"/> 
+        <input type="text" class="chatInputArea" /> 
         <input id="chatSubmitButton" type="button" value="Submit" />
         <br class="clear" />
     </div>
