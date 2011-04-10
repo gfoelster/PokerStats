@@ -21,39 +21,39 @@ namespace PokerStats
 
             if (Request.Params["ajax"] != null)
             {
-                int cardNumber = Convert.ToInt32(Request.Params["card"]);
-                Debug.WriteLine(cardNumber);
-                Response.Write("cards/"+cardNumber);
-                Response.Write(",");
+                //int cardNumber = Convert.ToInt32(Request.Params["card"]);
+                //Debug.WriteLine(cardNumber);
+                //Response.Write("cards/"+cardNumber);
+                //Response.Write(",");
 
-                //if (Request.Params["ID"] != null && Request.Params["position"] != null)
-                //{
-                //    int gameID = -1;
-                //    int position = -1;
+                if (Request.Params["ID"] != null && Request.Params["position"] != null)
+                {
+                    int gameID = -1;
+                    int position = -1;
 
-                //    if (Int32.TryParse(Request.Params["ID"], out gameID) && (Int32.TryParse(Request.Params["position"], out position)))
-                //    {
-                //        List<GameAction> gameActions = DataAccessProvider.Current.GetCommittedActions(gameID, position);
-                        
-                //        // set linked entities null for serialization
-                //        gameActions.ForEach((ga) => { ga.User = null; ga.Game = null; });
+                    if (Int32.TryParse(Request.Params["ID"], out gameID) && (Int32.TryParse(Request.Params["position"], out position)))
+                    {
+                        List<GameAction> gameActions = DataAccessProvider.Current.GetCommittedActions(gameID, position);
 
-                //        // serialize to json
-                //        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<GameAction>));
-                //        MemoryStream ms = new MemoryStream();
-                //        serializer.WriteObject(ms, gameActions);
-                //        string json = Encoding.Default.GetString(ms.ToArray());
+                        // set linked entities null for serialization
+                        gameActions.ForEach((ga) => { ga.User = null; ga.Game = null; });
 
-                //        Response.ContentType = "application/json";
-                //        Response.Write(json);
-                //        Response.End();
-                //    }
-                //}
+                        // serialize to json
+                        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<GameAction>));
+                        MemoryStream ms = new MemoryStream();
+                        serializer.WriteObject(ms, gameActions);
+                        string json = Encoding.Default.GetString(ms.ToArray());
+                        Debug.WriteLine(json);
+                        Response.ContentType = "application/json";
+                        Response.Write(json);
+                        Response.End();
+                    }
+                }
 
             
 
-                Response.Write(DateTime.Now.ToString());
-                Response.End();
+                //Response.Write(DateTime.Now.ToString());
+                //Response.End();
             }
 
 

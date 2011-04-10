@@ -115,7 +115,6 @@
     <Content Include="Login.aspx" />
     <Content Include="Scripts\jquery-1.5.2.js" />
     <Content Include="Scripts\jquery-1.5.2.min.js" />
-    <Content Include="Styles\screen.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
