@@ -8,7 +8,7 @@
     <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
             <script type="text/javascript">
          <!--
-                var aktiv = window.setInterval("doIt()", 1000);
+                //var aktiv = window.setInterval("doIt()", 1000);
                 var cardnumber = 0;
                 function doIt() {
 
