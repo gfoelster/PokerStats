@@ -53,7 +53,6 @@ namespace PokerStatsProcessor
                     }
 
                     Thread.Sleep(1000);
-                    //Console.WriteLine("\nProcessing completed.");
                 }
             }
         }
