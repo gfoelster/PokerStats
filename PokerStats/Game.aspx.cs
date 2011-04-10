@@ -19,7 +19,7 @@ namespace PokerStats
             {
                 int cardNumber = Convert.ToInt32(Request.Params["card"]);
                 Debug.WriteLine(cardNumber);
-                Response.Write("./cards/"+cardNumber+"h.png");
+                Response.Write("cards/"+cardNumber);
                 Response.Write(",");
 
                 //if(Request.Params["gameID"] != null && Request.Params["position"] != null)
