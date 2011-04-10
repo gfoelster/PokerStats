@@ -42,35 +42,34 @@
     <style type="text/css">
         .chatArea
         {
+            position: absolute;
+            height: 80px;
+            left: 0px;
+            right: 8px;
+            bottom: 0px;
+            padding:5px;
             
         }
         .textArea
         {
-            background: white;
-            position: absolute;
-            height: 150px;
-            left: 0px;
-            right: 0px;
-            bottom: 30px;
-            width: 99%;
+             width:100%;
         }
         
         .chatInputArea
         {
-            background: white;
-            position: absolute;
-            right: 200px;
-            left: 0px;
-            bottom: 5px;
+            margin-top:3px;
+            width:250px;
+            float:left;
         }
         
         #chatSubmitButton
         {
-            position: absolute;
-            bottom: 5px;
-            right: 0px;
-            margin-left: auto;
-            margin-right: 5px;
+           margin-top:2px;
+        }
+        
+        .clear
+        {
+            clear:both;
         }
         
         .clickMeButton
@@ -95,7 +94,9 @@
         {
             width: 715px;
             height: 334px;
-            margin-top: 155px;
+            margin-top:155px;
+            margin-left: auto;
+            margin-right:auto;
         }
         
         .playerPanel
@@ -246,10 +247,15 @@
     <div style="text-align: center">
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
     </div>
+
     <div class="chatArea"> 
+        
         <textarea class="textArea" id="chatTextArea"> blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textArea>
-    <input type="text" class="chatInputArea"/> 
-    <input id="chatSubmitButton" type="button" value="Submit" />
+
+        <br />
+        <input type="text" class="chatInputArea"/> 
+        <input id="chatSubmitButton" type="button" value="Submit" />
+        <br class="clear" />
     </div>
     </form>
 </body>
