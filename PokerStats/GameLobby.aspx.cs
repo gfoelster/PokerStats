@@ -41,9 +41,6 @@ namespace PokerStats
 
         protected void CreateButton_Click(object sender, EventArgs e)
         {
-            // CHANGE Jeff
-            // Alles ins DataAccess Projekt ausgelagert
-
             string gameName = NewGameName.Text.Trim();
             if (!String.IsNullOrEmpty(gameName) && !DataAccessProvider.Current.GameNameExists(gameName))
             {
