@@ -6,17 +6,24 @@
 <head runat="server">
     <title></title>
     <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
+    
+    
+    <style type="text/css">
+        
+    
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    <h1>Willkommen in der Pokerstats Lobby</h1>
-        <p>Bitte wähle ein Spiel aus, oder eröffne ein neues.</p>
-    </div>
-    <asp:ListBox ID="GamesList" runat="server" 
-        DataTextField="Name" DataValueField="GameID" 
-        onselectedindexchanged="GamesList_SelectedIndexChanged" 
-        AutoPostBack="True"></asp:ListBox>
+   
+        <h1>Pokerstats</h1>
+        <p>Verfügbare Spiele</p>
+
+        <asp:ListBox ID="GamesList" runat="server" 
+                     DataTextField="Name" 
+                     DataValueField="GameID" 
+                     onselectedindexchanged="GamesList_SelectedIndexChanged" 
+                     AutoPostBack="True"></asp:ListBox>
 
     <hr />
     <p>
