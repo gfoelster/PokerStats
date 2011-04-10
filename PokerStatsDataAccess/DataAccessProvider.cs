@@ -127,6 +127,10 @@ namespace PokerStatsDataAccess
         {
             return ctx.Users.Single(u => u.UserID == userID);
         }
+        public User GetUserByLogin(string login)
+        {
+            return ctx.Users.Single(u => u.Login == login);
+        }
         public int GetFreeSeat(Game game)
         {
             List<int> reservedSeats = ctx.UserSeats.Where(us => us.GameID == game.GameID).Select(us => us.Seat).ToList();

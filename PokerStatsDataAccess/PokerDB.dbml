@@ -7,7 +7,6 @@
       <Column Name="Text" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
       <Column Name="GameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Game_ChatMessage" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="User_ChatMessage" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.UserSeats" Member="UserSeats">
@@ -55,7 +54,6 @@
       <Column Name="PasswordHash" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="ImageID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Login" Type="System.String" DbType="VarChar(80) NOT NULL" CanBeNull="false" />
-      <Association Name="User_ChatMessage" Member="ChatMessages" ThisKey="UserID" OtherKey="UserID" Type="ChatMessage" />
       <Association Name="User_UserSeat" Member="UserSeats" ThisKey="UserID" OtherKey="UserID" Type="UserSeat" />
       <Association Name="User_GameAction" Member="GameActions" ThisKey="UserID" OtherKey="UserID" Type="GameAction" />
     </Type>

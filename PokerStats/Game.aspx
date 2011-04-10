@@ -8,19 +8,35 @@
     <script src="Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script type="text/javascript">
          <!--
-        $(document).ready(function () 
+
+        var currentUser;
+        $(document).ready(function ()
         {
-            $("#chatInputArea").keydown(function (e) 
+            $("#chatInputArea").keydown(function (e)
             {
                 if (e.keyCode == '13') // if 'Enter'...
-                 {
+                {
                     e.preventDefault();
                     PostChatMessage();
                 }
             }).focus();
 
             $("#chatSubmitButton").click(PostChatMessage);
+
+            GetCurrentUser();
         });
+
+        function GetCurrentUser()
+        {
+            $.getJSON("game.aspx?ajax=true&type=user", function (user)
+            {
+                currentUser = user;
+
+                // show avatar
+                $("#userAvatar").attr("src", user.ImageID)
+                                .attr("title", user.Name);
+            });
+        }
 
         function PostChatMessage() 
         {
@@ -64,7 +80,7 @@
         .chatArea
         {
             position: absolute;
-            height: 80px;
+            height: 150px;
             left: 0px;
             right: 8px;
             bottom: 0px;
@@ -74,6 +90,15 @@
         .textArea
         {
              width:100%;
+             height:115px;
+        }
+        
+        #userAvatar
+        {
+            float:left;
+            width:20px; height:20px;
+            margin-top:4px;
+            margin-right:3px;
         }
         
         #chatInputArea
@@ -108,6 +133,7 @@
             margin-left: auto;
             margin-right: auto;
             top: 20px; /*border:solid 1px black;*/
+          
         }
         
         .tableBackground
@@ -270,6 +296,7 @@
         <textarea class="textArea" id="chatTextArea" readonly="readonly"></textArea>
 
         <br />
+        <img id="userAvatar" />
         <input id="chatInputArea" type="text" maxlength="299"/> 
         <input id="chatSubmitButton" type="button" value="Senden" />
         <br class="clear" />

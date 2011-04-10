@@ -19,31 +19,36 @@ namespace PokerStats
         {
             if (Request.Params["ajax"] == null)
                 return;
-           
-            if (Request.Params["ID"] != null && Request.Params["position"] != null) 
-            {
-                int gameID = -1;
-                int position = -1;
 
-                if (Int32.TryParse(Request.Params["ID"], out gameID) && (Int32.TryParse(Request.Params["position"], out position)))
-                {
-                    if(Request["type"] != null)  // get game events or chat messages
-                    {
-                        if (Request["type"] == "event")
-                            GetEvents(gameID, position);
-                        else if (Request["type"] == "chat")
-                            GetChatMessages(gameID, position);
-                    }
-                    else if(Request.HttpMethod == "POST")   // post chat message
-                    {
-                        string chatMessage = Request.Form["chatmessage"].Trim();
-                        DataAccessProvider.Current.PostChatMessage(gameID, HttpContext.Current.User.Identity.Name, chatMessage);
-                    }
-                }
+            string json = string.Empty;
+
+            int gameID = -1;
+            int position = -1;
+
+            Int32.TryParse(Request.Params["ID"], out gameID);
+            Int32.TryParse(Request.Params["position"], out position);
+                
+            if(Request["type"] != null)  // get game events, chat messages or current user
+            {
+                if (Request["type"] == "event")
+                    json = GetEvents(gameID, position);
+                else if (Request["type"] == "chat")
+                    json = GetChatMessages(gameID, position);
+                else if (Request["type"] == "user")
+                    json = GetCurrentUser();
+
+                Response.ContentType = "application/json";
+                Response.Write(json);
+                Response.End();
+            }
+            else if(Request.HttpMethod == "POST")   // post chat message
+            {
+                string chatMessage = Request.Form["chatmessage"].Trim();
+                DataAccessProvider.Current.PostChatMessage(gameID, HttpContext.Current.User.Identity.Name, chatMessage);
             }
         }
 
-        private void GetEvents(int gameID, int position)
+        private string GetEvents(int gameID, int position)
         {
             List<GameAction> gameActions = DataAccessProvider.Current.GetCommittedActions(gameID, position);
 
@@ -56,17 +61,16 @@ namespace PokerStats
             serializer.WriteObject(ms, gameActions);
             string json = Encoding.Default.GetString(ms.ToArray());
             Debug.WriteLine(json);
-            Response.ContentType = "application/json";
-            Response.Write(json);
-            Response.End();
+
+            return json;
         }
 
-        private void GetChatMessages(int gameID, int position)
+        private string GetChatMessages(int gameID, int position)
         {
             List<ChatMessage> chatMessages = DataAccessProvider.Current.GetCommittedChatMessages(gameID, position, HttpContext.Current.User.Identity.Name);
 
             // set linked entities null for serialization
-            chatMessages.ForEach((cm) => { cm.User = null; cm.Game = null; });
+            chatMessages.ForEach((cm) => { /*cm.User = null;*/ cm.Game = null; });
 
             // serialize to json
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<ChatMessage>));
@@ -74,9 +78,34 @@ namespace PokerStats
             serializer.WriteObject(ms, chatMessages);
             string json = Encoding.Default.GetString(ms.ToArray());
             Debug.WriteLine(json);
-            Response.ContentType = "application/json";
-            Response.Write(json);
-            Response.End();
+
+            return json;
+        }
+
+        private string GetCurrentUser()
+        {
+            User user = DataAccessProvider.Current.GetUserByLogin(HttpContext.Current.User.Identity.Name);
+
+            // set linked entities null for serialization
+            user.GameActions = null;
+            user.UserSeats = null;
+            //user.ChatMessages = null;
+
+            // no need to send login information to client
+            user.PasswordHash = string.Empty;
+            user.Login = string.Empty;
+
+            // get gravatar image path
+            user.ImageID = Gravatar.GetImagePath(HttpContext.Current.User.Identity.Name);
+
+            // serialize to json
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(User));
+            MemoryStream ms = new MemoryStream();
+            serializer.WriteObject(ms, user);
+            string json = Encoding.Default.GetString(ms.ToArray());
+            Debug.WriteLine(json);
+
+            return json;
         }
     }
 }

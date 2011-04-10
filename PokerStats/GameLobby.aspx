@@ -5,8 +5,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <script src="Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
     
+    <script type="text/javascript">
+
+        $(document).ready(function ()
+        {
+            $(".newGameTextBox").focus();
+        });
+
+    </script>
     
     <style type="text/css">
         

@@ -134,8 +134,6 @@ namespace PokerStatsDataAccess
 		
 		private EntityRef<Game> _Game;
 		
-		private EntityRef<User> _User;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -153,7 +151,6 @@ namespace PokerStatsDataAccess
 		public ChatMessage()
 		{
 			this._Game = default(EntityRef<Game>);
-			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -188,10 +185,6 @@ namespace PokerStatsDataAccess
 			{
 				if ((this._UserID != value))
 				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnUserIDChanging(value);
 					this.SendPropertyChanging();
 					this._UserID = value;
@@ -275,40 +268,6 @@ namespace PokerStatsDataAccess
 						this._GameID = default(int);
 					}
 					this.SendPropertyChanged("Game");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ChatMessage", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.ChatMessages.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.ChatMessages.Add(this);
-						this._UserID = value.UserID;
-					}
-					else
-					{
-						this._UserID = default(int);
-					}
-					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -1168,8 +1127,6 @@ namespace PokerStatsDataAccess
 		
 		private string _Login;
 		
-		private EntitySet<ChatMessage> _ChatMessages;
-		
 		private EntitySet<UserSeat> _UserSeats;
 		
 		private EntitySet<GameAction> _GameActions;
@@ -1192,7 +1149,6 @@ namespace PokerStatsDataAccess
 		
 		public User()
 		{
-			this._ChatMessages = new EntitySet<ChatMessage>(new Action<ChatMessage>(this.attach_ChatMessages), new Action<ChatMessage>(this.detach_ChatMessages));
 			this._UserSeats = new EntitySet<UserSeat>(new Action<UserSeat>(this.attach_UserSeats), new Action<UserSeat>(this.detach_UserSeats));
 			this._GameActions = new EntitySet<GameAction>(new Action<GameAction>(this.attach_GameActions), new Action<GameAction>(this.detach_GameActions));
 			OnCreated();
@@ -1298,19 +1254,6 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ChatMessage", Storage="_ChatMessages", ThisKey="UserID", OtherKey="UserID")]
-		public EntitySet<ChatMessage> ChatMessages
-		{
-			get
-			{
-				return this._ChatMessages;
-			}
-			set
-			{
-				this._ChatMessages.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserSeat", Storage="_UserSeats", ThisKey="UserID", OtherKey="UserID")]
 		public EntitySet<UserSeat> UserSeats
 		{
@@ -1355,18 +1298,6 @@ namespace PokerStatsDataAccess
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_ChatMessages(ChatMessage entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_ChatMessages(ChatMessage entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
 		}
 		
 		private void attach_UserSeats(UserSeat entity)
