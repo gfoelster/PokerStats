@@ -155,67 +155,67 @@
             <img id="table" alt="" src="Images/tablev2.png" class="tableBackground" />
 
             <div class="playerPanel player1">
-                <img id="avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <img id="player1Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
                 <span class="playerName"> 1 </span>
                 <span class="chipStack">Chips: </span>
-                <img id="card1" class="leftcard" alt="" src="cards/3c.png" />
-                <img id="card2" class="rightcard" alt="" src="cards/3s.png" />
+                <img id="player1Card1" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="player1Card2" class="rightcard" alt="" src="cards/3s.png" />
             </div>
 
             <div class="playerPanel player2">
-                <img id="Img1" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <img id="player2Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
                 <span class="playerName"> 2 </span>
                 <span class="chipStack">Chips: </span>
-                <img id="Img2" class="leftcard" alt="" src="cards/3c.png" />
-                <img id="Img3" class="rightcard" alt="" src="cards/3s.png" />
+                <img id="player2Card1" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="player2Card2" class="rightcard" alt="" src="cards/3s.png" />
             </div>
 
             <div class="playerPanel player3">
-                <img id="Img13" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <img id="player3Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
                 <span class="playerName"> 3 </span>
                 <span class="chipStack">Chips: </span>
-                <img id="Img14" class="leftcard" alt="" src="cards/3c.png" />
-                <img id="Img15" class="rightcard" alt="" src="cards/3s.png" />
+                <img id="player3Card1" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="player3Card2" class="rightcard" alt="" src="cards/3s.png" />
             </div>
 
             <div class="playerPanel player4">
-                <img id="Img16" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <img id="player4Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
                 <span class="playerName"> 4 </span>
                 <span class="chipStack">Chips: </span>
-                <img id="Img17" class="leftcard" alt="" src="cards/3c.png" />
-                <img id="Img18" class="rightcard" alt="" src="cards/3s.png" />
+                <img id="player4Card1" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="player4Card2" class="rightcard" alt="" src="cards/3s.png" />
             </div>
 
             <div class="playerPanel player5">
-                <img id="Img7" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <img id="player5Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
                 <span class="playerName"> 5 </span>
                 <span class="chipStack">Chips: </span>
-                <img id="Img8" class="leftcard" alt="" src="cards/3c.png" />
-                <img id="Img9" class="rightcard" alt="" src="cards/3s.png" />
+                <img id="player5Card1" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="player5Card2" class="rightcard" alt="" src="cards/3s.png" />
             </div>
 
             <div class="playerPanel player6">
-                <img id="Img10" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <img id="player6Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
                 <span class="playerName"> 6 </span>
                 <span class="chipStack">Chips: </span>
-                <img id="Img11" class="leftcard" alt="" src="cards/3c.png" />
-                <img id="Img12" class="rightcard" alt="" src="cards/3s.png" />
+                <img id="player6Card1" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="player6Card2" class="rightcard" alt="" src="cards/3s.png" />
             </div>
 
             <div class="playerPanel player7">
-                <img id="Img19" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <img id="player7Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
                 <span class="playerName"> 7 </span>
                 <span class="chipStack">Chips: </span>
-                <img id="Img20" class="leftcard" alt="" src="cards/3c.png" />
-                <img id="Img21" class="rightcard" alt="" src="cards/3s.png" />
+                <img id="player7Card1" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="player7Card2" class="rightcard" alt="" src="cards/3s.png" />
             </div>
 
              <div class="playerPanel player8">
-                <img id="Img4" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <img id="player8Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
                 <span class="playerName"> 8 </span>
                 <span class="chipStack">Chips: </span>
-                <img id="Img5" class="leftcard" alt="" src="cards/3c.png" />
-                <img id="Img6" class="rightcard" alt="" src="cards/3s.png" />
+                <img id="player8Card1" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="player8Card2" class="rightcard" alt="" src="cards/3s.png" />
             </div>
 
         </div>        
