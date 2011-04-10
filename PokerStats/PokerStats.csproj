@@ -175,8 +175,8 @@
       <DependentUpon>temp2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tools\Encryption.cs" />
-    <Compile Include="Temp.aspx.cs">
     <Compile Include="Tools\Gravatar.cs" />
+    <Compile Include="Temp.aspx.cs">
       <DependentUpon>Temp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
