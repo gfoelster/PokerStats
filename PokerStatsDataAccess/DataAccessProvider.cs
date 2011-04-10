@@ -150,7 +150,16 @@ namespace PokerStatsDataAccess
             return freeSeatNumber;
         }
 
+        #region Chat
 
+        public List<ChatMessage> GetCommittedChatMessages(int gameID, int fromPositionInclusive)
+        {
+            return ctx.ChatMessages.Where(cm => cm.GameID == gameID && cm.ChatMessageID >= fromPositionInclusive)
+                                   .OrderBy(cm => cm.ChatMessageID)
+                                   .ToList();
+        }
+
+        #endregion
 
 
         #region Game Actions
