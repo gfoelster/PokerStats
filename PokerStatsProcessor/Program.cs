@@ -47,7 +47,7 @@ namespace PokerStatsProcessor
 
                     foreach (var ga in gameActions)
                     {
-                        List<GameAction> actions = ga.OrderBy(g => g.ID).ToList();
+                        List<GameAction> actions = ga.OrderBy(g => g.GameActionID).ToList();
                         if(actions.Count > 0)
                             ProcessActions(ga.Key, actions);
                     }
@@ -91,7 +91,7 @@ namespace PokerStatsProcessor
             Console.WriteLine(String.Format("{0} joined the game.", user.Name));
 
             // place user, commit action
-            ctx.PlaceUserOnFreeSeat(game, user, action.ID);
+            ctx.PlaceUserOnFreeSeat(game, user, action.GameActionID);
 
             // how many users are in the game?
             List<int> usersInGame = ctx.GetUsersInGame(game);
