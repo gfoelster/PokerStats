@@ -6,6 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
 using PokerStatsDataAccess;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using System.Text;
+using PokerStats.Tools;
 
 namespace PokerStats
 {
@@ -22,19 +26,26 @@ namespace PokerStats
                 Response.Write("cards/"+cardNumber);
                 Response.Write(",");
 
-                //if(Request.Params["gameID"] != null && Request.Params["position"] != null)
+                //if (Request.Params["ID"] != null && Request.Params["position"] != null)
                 //{
                 //    int gameID = -1;
                 //    int position = -1;
 
-                //    if(Int32.TryParse(Request.Params["gameID"], out gameID) && (Int32.TryParse(Request.Params["position"], out position)))
+                //    if (Int32.TryParse(Request.Params["ID"], out gameID) && (Int32.TryParse(Request.Params["position"], out position)))
                 //    {
                 //        List<GameAction> gameActions = DataAccessProvider.Current.GetCommittedActions(gameID, position);
                         
-                //        // serialize to string somehow....
-                //        string serialized = "blaaaaa";
-                        
-                //        Response.Write(serialized);
+                //        // set linked entities null for serialization
+                //        gameActions.ForEach((ga) => { ga.User = null; ga.Game = null; });
+
+                //        // serialize to json
+                //        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<GameAction>));
+                //        MemoryStream ms = new MemoryStream();
+                //        serializer.WriteObject(ms, gameActions);
+                //        string json = Encoding.Default.GetString(ms.ToArray());
+
+                //        Response.ContentType = "application/json";
+                //        Response.Write(json);
                 //        Response.End();
                 //    }
                 //}

@@ -39,6 +39,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -175,6 +176,7 @@
     </Compile>
     <Compile Include="Tools\Encryption.cs" />
     <Compile Include="Temp.aspx.cs">
+    <Compile Include="Tools\Gravatar.cs" />
       <DependentUpon>Temp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
