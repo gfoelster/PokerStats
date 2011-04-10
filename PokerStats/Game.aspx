@@ -70,44 +70,163 @@
 
          //-->
             </script>
+
+            <style type="text/css">
+            
+                .tableContainer
+                {
+                    width:1000px;
+                    height:640px;
+                    position:relative;
+                    margin-left:auto;
+                    margin-right:auto;
+                    top:80px;
+                    /*border:solid 1px black;*/
+                }
+                
+            
+                .tableBackground
+                {
+                    width: 715px; height: 334px; margin-top:155px;
+                  
+                }
+                
+                .playerPanel
+                {
+                    position:absolute; 
+                    height: 142px; 
+                    width: 115px; 
+                    background-color:Gray;
+                }
+                
+                .playerName
+                {
+                    margin-left:10px;
+                }
+                
+                .chipStack
+                {
+                    position:absolute;
+                    top:40px;
+                    left:0px;
+                }
+                
+                .avatar
+                {
+                    height:40px;
+                    width:37px;   
+                    position:absolute;
+                    left:0px; top:0px;  
+                }
+                
+                .leftcard
+                {
+                     height: 80px; width: 57px;
+                     position:absolute;
+                     left:0px;
+                     bottom:0px;
+                }
+                
+                .rightcard
+                {
+                     height: 80px; width: 57px;
+                     position:absolute;
+                     right:0px;
+                     bottom:0px;
+                }
+                
+                .player1  { top:120px; left:15px; }
+                .player2  { top:0px; left:260px; }
+                .player3  { top:0px; right:260px; }
+                .player4  { top:120px; right:15px; }
+                .player5  { bottom:120px; right:15px; }
+                .player6  { bottom:0px; right:260px; }
+                .player7  { bottom:0px; left:260px; }
+                .player8  { bottom:120px; left:15px; }
+                
+                
+            </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div style="text-align: center">
-        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-    </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div style="height: 438px; text-align: center; z-index: 1; left: 10px; top: 174px; position: absolute; width: 1223px;">
-            <br />
-            <br />
-            <img id="table" alt="" src="Images/tablev2.png" 
-            style="width: 723px; height: 352px; text-align: center;" />
-            <div style="z-index: 1; left: 263px; top: -481px; position: relative; height: 172px; width: 135px; text-align: left">
-                <img id="avatar" alt="" src="Images/anonymous_avatar.gif" 
-                    style="height: 40px; width: 37px; " />
-            <span style="text-align: left"> Anonymous <br />
-                   Chips: 
-            </span>
+   
+        <div class="tableContainer">
+
+            <img id="table" alt="" src="Images/tablev2.png" class="tableBackground" />
+
+            <div class="playerPanel player1">
+                <img id="avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <span class="playerName"> 1 </span>
+                <span class="chipStack">Chips: </span>
+                <img id="card1" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="card2" class="rightcard" alt="" src="cards/3s.png" />
             </div>
-            <img id="card1" alt="" src="cards/3c.png" 
-                
-                style="z-index: 1; left: 268px; top: -5px; position: absolute; height: 80px; width: 57px; right: 898px;" /><img 
-                id="card2" alt="" src="cards/3s.png" 
-                
-                style="z-index: 1; left: 333px; top: -6px; position: absolute; height: 80px; width: 57px" /></div>
-        <br />
-    <p>
-        <input id="Button1" type="button" value="button" onclick="return doIt()" />
+
+            <div class="playerPanel player2">
+                <img id="Img1" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <span class="playerName"> 2 </span>
+                <span class="chipStack">Chips: </span>
+                <img id="Img2" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="Img3" class="rightcard" alt="" src="cards/3s.png" />
+            </div>
+
+            <div class="playerPanel player3">
+                <img id="Img13" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <span class="playerName"> 3 </span>
+                <span class="chipStack">Chips: </span>
+                <img id="Img14" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="Img15" class="rightcard" alt="" src="cards/3s.png" />
+            </div>
+
+            <div class="playerPanel player4">
+                <img id="Img16" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <span class="playerName"> 4 </span>
+                <span class="chipStack">Chips: </span>
+                <img id="Img17" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="Img18" class="rightcard" alt="" src="cards/3s.png" />
+            </div>
+
+            <div class="playerPanel player5">
+                <img id="Img7" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <span class="playerName"> 5 </span>
+                <span class="chipStack">Chips: </span>
+                <img id="Img8" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="Img9" class="rightcard" alt="" src="cards/3s.png" />
+            </div>
+
+            <div class="playerPanel player6">
+                <img id="Img10" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <span class="playerName"> 6 </span>
+                <span class="chipStack">Chips: </span>
+                <img id="Img11" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="Img12" class="rightcard" alt="" src="cards/3s.png" />
+            </div>
+
+            <div class="playerPanel player7">
+                <img id="Img19" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <span class="playerName"> 7 </span>
+                <span class="chipStack">Chips: </span>
+                <img id="Img20" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="Img21" class="rightcard" alt="" src="cards/3s.png" />
+            </div>
+
+             <div class="playerPanel player8">
+                <img id="Img4" class="avatar" alt="" src="Images/anonymous_avatar.gif"  />
+                <span class="playerName"> 8 </span>
+                <span class="chipStack">Chips: </span>
+                <img id="Img5" class="leftcard" alt="" src="cards/3c.png" />
+                <img id="Img6" class="rightcard" alt="" src="cards/3s.png" />
+            </div>
+
+        </div>        
+    
+        <p>
+            <input id="Button1" type="button" value="button" onclick="return doIt()" />
         </p>
+
+           <div style="text-align: center">
+                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+            </div>
     </form>
 </body>
 </html>
