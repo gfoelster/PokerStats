@@ -19,45 +19,47 @@ namespace PokerStats
         {
             Label1.Text = Request.Params["id"];
 
-            if (Request.Params["ajax"] != null)
+            if (Request.Params["ajax"] == null)
+                return;
+
+
+            if (Request.Params["ID"] != null && Request.Params["position"] != null && (Request["event"] != null || Request["chat"] != null)) 
             {
-                //int cardNumber = Convert.ToInt32(Request.Params["card"]);
-                //Debug.WriteLine(cardNumber);
-                //Response.Write("cards/"+cardNumber);
-                //Response.Write(",");
+                int gameID = -1;
+                int position = -1;
 
-                if (Request.Params["ID"] != null && Request.Params["position"] != null)
+                if (Int32.TryParse(Request.Params["ID"], out gameID) && (Int32.TryParse(Request.Params["position"], out position)))
                 {
-                    int gameID = -1;
-                    int position = -1;
-
-                    if (Int32.TryParse(Request.Params["ID"], out gameID) && (Int32.TryParse(Request.Params["position"], out position)))
-                    {
-                        List<GameAction> gameActions = DataAccessProvider.Current.GetCommittedActions(gameID, position);
-
-                        // set linked entities null for serialization
-                        gameActions.ForEach((ga) => { ga.User = null; ga.Game = null; });
-
-                        // serialize to json
-                        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<GameAction>));
-                        MemoryStream ms = new MemoryStream();
-                        serializer.WriteObject(ms, gameActions);
-                        string json = Encoding.Default.GetString(ms.ToArray());
-                        Debug.WriteLine(json);
-                        Response.ContentType = "application/json";
-                        Response.Write(json);
-                        Response.End();
-                    }
+                    GetEvents(gameID, position);
                 }
-
-            
-
-                //Response.Write(DateTime.Now.ToString());
-                //Response.End();
             }
+            else if (Request.Params["ID"] != null && Request.HttpMethod == "POST")
+            {
+                if (Request.Form["chat"] != null)
+                {
+                    string chatMessage = Request.Form["chat"].Trim();
 
 
-         
+                }
+            }
+        }
+
+        private void GetEvents(int gameID, int position)
+        {
+            List<GameAction> gameActions = DataAccessProvider.Current.GetCommittedActions(gameID, position);
+
+            // set linked entities null for serialization
+            gameActions.ForEach((ga) => { ga.User = null; ga.Game = null; });
+
+            // serialize to json
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<GameAction>));
+            MemoryStream ms = new MemoryStream();
+            serializer.WriteObject(ms, gameActions);
+            string json = Encoding.Default.GetString(ms.ToArray());
+            Debug.WriteLine(json);
+            Response.ContentType = "application/json";
+            Response.Write(json);
+            Response.End();
         }
     }
 }

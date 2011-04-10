@@ -29,7 +29,8 @@
                 var items = [];
 
                 $.each(json, function (key, val) {
-                    items.push('<li id="' + key + '">' + val + '</li>');
+                    alert(key);
+                    items.push('<li id="' + key + '">' + val["ActionTypeID"] + '</li>');
                 });
                 $('<ul/>', {
                     'class': 'my-new-list',

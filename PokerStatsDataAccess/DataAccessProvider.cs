@@ -152,6 +152,19 @@ namespace PokerStatsDataAccess
 
         #region Chat
 
+        public void PostChatMessage(int gameID, string userLogin, string text)
+        {
+            ChatMessage msg = new ChatMessage()
+            {
+                GameID = gameID,
+                UserID = ctx.Users.Single(u => u.Login == userLogin).UserID,
+                Text = text
+            };
+
+            ctx.ChatMessages.InsertOnSubmit(msg);
+            ctx.SubmitChanges();
+        }
+
         public List<ChatMessage> GetCommittedChatMessages(int gameID, int fromPositionInclusive)
         {
             return ctx.ChatMessages.Where(cm => cm.GameID == gameID && cm.ChatMessageID >= fromPositionInclusive)
