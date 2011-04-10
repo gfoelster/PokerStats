@@ -29,7 +29,7 @@
                 var items = [];
 
                 $.each(json, function (key, val) {
-                    items.push('<li id="' + key + '">' + val + '</li>');
+                    items.push('<li id="' + key.toString + '">' + val.GameActionID + '</li>');
                 });
                 $('<ul/>', {
                     'class': 'my-new-list',
@@ -39,6 +39,39 @@
         };
     </script>
     <style type="text/css">
+        .chatArea
+        {
+            
+        }
+        .textArea
+        {
+            background: white;
+            position: absolute;
+            height: 150px;
+            left: 0px;
+            right: 0px;
+            bottom: 30px;
+            width: 99%;
+        }
+        
+        .chatInputArea
+        {
+            background: white;
+            position: absolute;
+            right: 200px;
+            left: 0px;
+            bottom: 5px;
+        }
+        
+        #chatSubmitButton
+        {
+            position: absolute;
+            bottom: 5px;
+            right: 0px;
+            margin-left: auto;
+            margin-right: 5px;
+        }
+        
         .clickMeButton
         {
             position: relative;
@@ -211,6 +244,11 @@
     </div>
     <div style="text-align: center">
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    </div>
+    <div class="chatArea"> 
+        <textarea class="textArea" id="chatTextArea"> blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textArea>
+    <input type="text" class="chatInputArea"/> 
+    <input id="chatSubmitButton" type="button" value="Submit" />
     </div>
     </form>
 </body>
