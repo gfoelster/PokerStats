@@ -239,7 +239,7 @@
 
     <div class="chatArea"> 
         
-        <textarea class="textArea" id="chatTextArea"> blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textArea>
+        <textarea class="textArea" id="chatTextArea">blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textArea>
 
         <br />
         <input type="text" class="chatInputArea" maxlength="299"/> 
