@@ -17,10 +17,10 @@ namespace PokerStats
            
         }
 
-        protected void LogoutButton_Click(object sender, EventArgs e)
-        {
-            FormsAuthentication.SignOut();
-            FormsAuthentication.RedirectToLoginPage();
-        }
+        //protected void LogoutButton_Click(object sender, EventArgs e)
+        //{
+        //    FormsAuthentication.SignOut();
+        //    FormsAuthentication.RedirectToLoginPage();
+        //}
     }
 }
