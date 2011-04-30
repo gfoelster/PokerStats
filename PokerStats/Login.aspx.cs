@@ -25,7 +25,7 @@ namespace PokerStats.Account
             string login = UserName.Text.Trim();
             string passwordHash = EncryptionHelper.EncryptString(Password.Text.Trim());
 
-            if (ctx.Users.Any(u => u.Login == login && u.PasswordHash == passwordHash))
+            if (ctx.User.Any(u => u.Login == login && u.PasswordHash == passwordHash))
             {
                 FormsAuthentication.SetAuthCookie(login, RememberMe.Checked);
                 Response.Redirect("~/GameLobby.aspx");

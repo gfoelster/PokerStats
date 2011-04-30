@@ -8,8 +8,11 @@
     <script src="Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script type="text/javascript">
          <!--
-
+        var chatPosition = -1;
+        var eventPosition = -1;
         var currentUser;
+        var allUsers = [];
+
         $(document).ready(function ()
         {
             $("#chatInputArea").keydown(function (e)
@@ -24,7 +27,26 @@
             $("#chatSubmitButton").click(PostChatMessage);
 
             GetCurrentUser();
+            var aktiv = window.setInterval("metaPolling()", 1000);
         });
+
+        function metaPolling() 
+        {
+            pollEvents();
+            pollChatMessages();
+            $("#debugLabel").text(new Date().getSeconds());
+        };
+
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
 
         function GetCurrentUser()
         {
@@ -38,41 +60,88 @@
             });
         }
 
+        function ProcessEvent(evt)
+        {
+            switch (evt.ActionTypeID)
+            {
+                case 1: DisplayText("JoinAction"); break;
+                default: alert("Unknown action type!"); break;
+
+            }
+        }
+
+        function DisplayText(text)
+        {
+            var output = $("#chatTextArea");
+            output.val(output.val() + text + "\n")
+                          .scrollTop(output[0].scrollHeight - output.height()); // scroll down 
+        }
+
         function PostChatMessage() 
         {
              var message = $("#chatInputArea").val();
-             if (message != '')
-             {
-                    $.post("game.aspx?ajax=true&ID=5&position=1", { chatmessage: message });
+             if (message != '') {
+                 var gameID = getUrlVars()["id"];
+
+                 $.post("game.aspx?ajax=true&ID=" + gameID + "&type=postmessage", { chatmessage: message });
                     $("#chatInputArea").val("");
 
-                    var output = $("#chatTextArea");
-
-                    if (output.val() != '')
-                        message = "\n" + message;
-
-                    output.val(output.val() + message)
-                          .scrollTop(output[0].scrollHeight - output.height()); // scroll down 
+                    DisplayText(message);
              }
         }
 
-        //        var aktiv = window.setInterval("doIt()", 1000);
-        var cardnumber = 0;
-        function doIt() {
-            //            cardnumber++;
-            //            $.get('game.aspx?ajax=true&card=' + ((cardnumber % 9) + 2), function (data) {
-            //                var splitted = data.split(",");
-            //                $("#player1Card1").attr("src", splitted[0] + "c.png");
-            //                $("#player1Card2").attr("src", splitted[0] + "s.png");
+        function pollChatMessages() 
+        {
+            var gameID = getUrlVars()["id"];
 
-            //            });
-            $.getJSON("game.aspx?ajax=true&ID=5&position=1&type=event", function (json) {
+            var isReconnect = false;
+            if (chatPosition == -1)
+                isReconnect = true;
+
+            $.getJSON("game.aspx?ajax=true&ID=" + gameID + "&position=" + chatPosition + "&type=chat&timestamp=" + new Date().getTime(), function (json)
+            {
+                if (json.length > 0)
+                {
+                    var items = "";
+                    $.each(json, function (ndx, val)
+                    {
+                        if (isReconnect || val.UserID != currentUser.UserID) // filter out current user
+                        {
+                            items = items + val.UserID + ": " + val.Text;
+
+                            if (ndx < json.length - 1)
+                                items = items + "\n";
+                        }
+
+                        // increment chatposition
+                        chatPosition = val.ChatMessageID;
+                    });
+
+                    if (items != '')
+                        DisplayText(items);
+                }
+            });  
+        };
+
+        function pollEvents() 
+        {
+            var gameID = getUrlVars()["id"];
+            $.getJSON("game.aspx?ajax=true&ID=" + gameID + "&position=" + eventPosition + "&type=event&timestamp=" + new Date().getTime(), function (json)
+            {
                 var items = "";
 
-                $.each(json, function (key, val) {
-                    items = items + key + "\t" + val.ActionTypeID + "\t" + val.Timestamp + "\n";
+                $.each(json, function (ndx, val)
+                {
+                    items = items + ndx + "\t" + val.ActionTypeID + "\t" + val.Timestamp;
+
+                    if (ndx < json.length - 1)
+                        items = items + "\n";
+
+                    // increment eventposition
+                    eventPosition = val.GameActionID;
+
+                    ProcessEvent(val);
                 });
-                $("#chatTextArea").val(items);
             });
         };
     </script>
@@ -289,6 +358,7 @@
     </div>
     <div>
         <input class="clickMeButton" id="Button1" type="button" value="Click me!" onclick="return doIt()" />
+        <span id="debugLabel"> 0 </span>
     </div>
 
     <div class="chatArea"> 

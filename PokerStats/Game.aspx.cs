@@ -36,22 +36,22 @@ namespace PokerStats
                     json = GetChatMessages(gameID, position);
                 else if (Request["type"] == "user")
                     json = GetCurrentUser();
-
+                else if (Request["type"] == "postmessage")
+                {
+                    string chatMessage = Request.Form["chatmessage"].Trim();
+                    DataAccessProvider.Current.PostChatMessage(gameID, HttpContext.Current.User.Identity.Name, chatMessage);
+                }
+                
                 Response.ContentType = "application/json";
                 Response.Write(json);
                 Response.End();
-            }
-            else if(Request.HttpMethod == "POST")   // post chat message
-            {
-                string chatMessage = Request.Form["chatmessage"].Trim();
-                DataAccessProvider.Current.PostChatMessage(gameID, HttpContext.Current.User.Identity.Name, chatMessage);
             }
         }
 
         private string GetEvents(int gameID, int position)
         {
             List<GameAction> gameActions = DataAccessProvider.Current.GetCommittedActions(gameID, position);
-
+            
             // set linked entities null for serialization
             gameActions.ForEach((ga) => { ga.User = null; ga.Game = null; });
 
@@ -69,9 +69,6 @@ namespace PokerStats
         {
             List<ChatMessage> chatMessages = DataAccessProvider.Current.GetCommittedChatMessages(gameID, position, HttpContext.Current.User.Identity.Name);
 
-            // set linked entities null for serialization
-            chatMessages.ForEach((cm) => { /*cm.User = null;*/ cm.Game = null; });
-
             // serialize to json
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<ChatMessage>));
             MemoryStream ms = new MemoryStream();
@@ -87,8 +84,8 @@ namespace PokerStats
             User user = DataAccessProvider.Current.GetUserByLogin(HttpContext.Current.User.Identity.Name);
 
             // set linked entities null for serialization
-            user.GameActions = null;
-            user.UserSeats = null;
+            user.GameAction = null;
+            user.UserSeat = null;
             //user.ChatMessages = null;
 
             // no need to send login information to client
@@ -97,7 +94,6 @@ namespace PokerStats
 
             // get gravatar image path
             user.ImageID = Gravatar.GetImagePath(HttpContext.Current.User.Identity.Name);
-
             // serialize to json
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(User));
             MemoryStream ms = new MemoryStream();

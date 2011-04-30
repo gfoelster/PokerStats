@@ -64,7 +64,7 @@ namespace PokerStatsProcessor
             foreach (GameAction action in actions)
             {
                 Console.WriteLine(String.Format("Process Action, type: \"{0}\", game: \"{1}\"", action.ToString(), game.Name));
-
+                
                 switch (action.ActionTypeID)
                 {
                     case (int)ActionTypes.UserJoined : UserJoined(game, action); break;

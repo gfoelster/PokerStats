@@ -1,61 +1,59 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PokerStats" Class="PokerDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=81.20.84.98\SqlExpress,4530;Initial Catalog=PokerStats;Persist Security Info=True;User ID=Pokeruser" SettingsObjectName="PokerStatsDataAccess.Properties.Settings" SettingsPropertyName="PokerStatsConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.ChatMessages" Member="ChatMessages">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="PokerDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=81.20.84.98\SqlExpress,4530;Persist Security Info=True;User ID=Pokeruser" SettingsObjectName="PokerStatsDataAccess.Properties.Settings" SettingsPropertyName="DataSourceConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ChatMessages" Member="ChatMessage">
     <Type Name="ChatMessage">
       <Column Name="ChatMessageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Text" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
       <Column Name="GameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Game_ChatMessage" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.UserSeats" Member="UserSeats">
+  <Table Name="dbo.UserSeats" Member="UserSeat">
     <Type Name="UserSeat">
       <Column Name="UserSeatID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Seat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="GameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Game_UserSeat" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="User_UserSeat" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Association Name="Games_UserSeats" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Users_UserSeats" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.GameActions" Member="GameActions">
+  <Table Name="dbo.GameActions" Member="GameAction">
     <Type Name="GameAction">
       <Column Name="GameActionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ActionTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Round" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Data" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Data" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
       <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="GameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IsCommitted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Game_GameAction" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="User_GameAction" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Association Name="Games_GameActions" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Users_GameActions" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Games" Member="Games">
+  <Table Name="dbo.Games" Member="Game">
     <Type Name="Game">
       <Column Name="GameID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="StartTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Round" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CurrentButtonPosition" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Game_ChatMessage" Member="ChatMessages" ThisKey="GameID" OtherKey="GameID" Type="ChatMessage" />
-      <Association Name="Game_UserSeat" Member="UserSeats" ThisKey="GameID" OtherKey="GameID" Type="UserSeat" />
-      <Association Name="Game_GameAction" Member="GameActions" ThisKey="GameID" OtherKey="GameID" Type="GameAction" />
+      <Association Name="Games_UserSeats" Member="UserSeat" ThisKey="GameID" OtherKey="GameID" Type="UserSeat" />
+      <Association Name="Games_GameActions" Member="GameAction" ThisKey="GameID" OtherKey="GameID" Type="GameAction" />
     </Type>
   </Table>
-  <Table Name="dbo.Users" Member="Users">
+  <Table Name="dbo.Users" Member="User">
     <Type Name="User">
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="PasswordHash" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="ImageID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Login" Type="System.String" DbType="VarChar(80) NOT NULL" CanBeNull="false" />
-      <Association Name="User_UserSeat" Member="UserSeats" ThisKey="UserID" OtherKey="UserID" Type="UserSeat" />
-      <Association Name="User_GameAction" Member="GameActions" ThisKey="UserID" OtherKey="UserID" Type="GameAction" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ImageID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Login" Type="System.String" DbType="NVarChar(80) NOT NULL" CanBeNull="false" />
+      <Association Name="Users_UserSeats" Member="UserSeat" ThisKey="UserID" OtherKey="UserID" Type="UserSeat" />
+      <Association Name="Users_GameActions" Member="GameAction" ThisKey="UserID" OtherKey="UserID" Type="GameAction" />
     </Type>
   </Table>
 </Database>
