@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="PokerDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="PokerDBDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=81.20.84.98\SqlExpress,4530;Persist Security Info=True;User ID=Pokeruser" SettingsObjectName="PokerStatsDataAccess.Properties.Settings" SettingsPropertyName="DataSourceConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ChatMessages" Member="ChatMessage">
     <Type Name="ChatMessage">
@@ -14,8 +14,8 @@
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Seat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="GameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Games_UserSeats" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Users_UserSeats" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Association Name="Game_UserSeat" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_UserSeat" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.GameActions" Member="GameAction">
@@ -28,8 +28,8 @@
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="GameID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IsCommitted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Games_GameActions" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Users_GameActions" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Association Name="Game_GameAction" Member="Game" ThisKey="GameID" OtherKey="GameID" Type="Game" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_GameAction" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Games" Member="Game">
@@ -41,8 +41,8 @@
       <Column Name="EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Round" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CurrentButtonPosition" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Games_UserSeats" Member="UserSeat" ThisKey="GameID" OtherKey="GameID" Type="UserSeat" />
-      <Association Name="Games_GameActions" Member="GameAction" ThisKey="GameID" OtherKey="GameID" Type="GameAction" />
+      <Association Name="Game_UserSeat" Member="UserSeat" ThisKey="GameID" OtherKey="GameID" Type="UserSeat" />
+      <Association Name="Game_GameAction" Member="GameAction" ThisKey="GameID" OtherKey="GameID" Type="GameAction" />
     </Type>
   </Table>
   <Table Name="dbo.Users" Member="User">
@@ -52,8 +52,8 @@
       <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="ImageID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Login" Type="System.String" DbType="NVarChar(80) NOT NULL" CanBeNull="false" />
-      <Association Name="Users_UserSeats" Member="UserSeat" ThisKey="UserID" OtherKey="UserID" Type="UserSeat" />
-      <Association Name="Users_GameActions" Member="GameAction" ThisKey="UserID" OtherKey="UserID" Type="GameAction" />
+      <Association Name="User_UserSeat" Member="UserSeat" ThisKey="UserID" OtherKey="UserID" Type="UserSeat" />
+      <Association Name="User_GameAction" Member="GameAction" ThisKey="UserID" OtherKey="UserID" Type="GameAction" />
     </Type>
   </Table>
 </Database>

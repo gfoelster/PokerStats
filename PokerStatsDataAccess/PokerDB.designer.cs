@@ -18,6 +18,7 @@ namespace PokerStatsDataAccess
 	using System.Reflection;
 	using System.Linq;
 	using System.Linq.Expressions;
+	using System.Runtime.Serialization;
 	using System.ComponentModel;
 	using System;
 	
@@ -119,6 +120,7 @@ namespace PokerStatsDataAccess
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ChatMessages")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class ChatMessage : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -148,10 +150,11 @@ namespace PokerStatsDataAccess
 		
 		public ChatMessage()
 		{
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChatMessageID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int ChatMessageID
 		{
 			get
@@ -172,6 +175,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public int UserID
 		{
 			get
@@ -192,6 +196,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="NVarChar(300) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public string Text
 		{
 			get
@@ -212,6 +217,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GameID", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public int GameID
 		{
 			get
@@ -250,9 +256,22 @@ namespace PokerStatsDataAccess
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserSeats")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class UserSeat : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -286,12 +305,11 @@ namespace PokerStatsDataAccess
 		
 		public UserSeat()
 		{
-			this._Game = default(EntityRef<Game>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserSeatID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int UserSeatID
 		{
 			get
@@ -312,6 +330,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public int UserID
 		{
 			get
@@ -336,6 +355,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Seat", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public int Seat
 		{
 			get
@@ -356,6 +376,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GameID", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public int GameID
 		{
 			get
@@ -379,7 +400,7 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Games_UserSeats", Storage="_Game", ThisKey="GameID", OtherKey="GameID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_UserSeat", Storage="_Game", ThisKey="GameID", OtherKey="GameID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Game Game
 		{
 			get
@@ -413,7 +434,7 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_UserSeats", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserSeat", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
 		public User User
 		{
 			get
@@ -466,9 +487,24 @@ namespace PokerStatsDataAccess
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			this._Game = default(EntityRef<Game>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GameActions")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class GameAction : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -518,12 +554,11 @@ namespace PokerStatsDataAccess
 		
 		public GameAction()
 		{
-			this._Game = default(EntityRef<Game>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GameActionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int GameActionID
 		{
 			get
@@ -544,6 +579,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActionTypeID", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public int ActionTypeID
 		{
 			get
@@ -564,6 +600,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Round", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public int Round
 		{
 			get
@@ -584,6 +621,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Data", DbType="NVarChar(250)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public string Data
 		{
 			get
@@ -604,6 +642,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public System.Nullable<int> UserID
 		{
 			get
@@ -628,6 +667,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timestamp", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public System.DateTime Timestamp
 		{
 			get
@@ -648,6 +688,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GameID", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public int GameID
 		{
 			get
@@ -672,6 +713,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsCommitted", DbType="Bit NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8)]
 		public bool IsCommitted
 		{
 			get
@@ -691,7 +733,7 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Games_GameActions", Storage="_Game", ThisKey="GameID", OtherKey="GameID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_GameAction", Storage="_Game", ThisKey="GameID", OtherKey="GameID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Game Game
 		{
 			get
@@ -725,7 +767,7 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_GameActions", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_GameAction", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
 		public User User
 		{
 			get
@@ -778,9 +820,24 @@ namespace PokerStatsDataAccess
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			this._Game = default(EntityRef<Game>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Games")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Game : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -804,6 +861,8 @@ namespace PokerStatsDataAccess
 		
 		private EntitySet<GameAction> _GameAction;
 		
+		private bool serializing;
+		
     #region Definitionen der Erweiterungsmethoden
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -826,12 +885,11 @@ namespace PokerStatsDataAccess
 		
 		public Game()
 		{
-			this._UserSeat = new EntitySet<UserSeat>(new Action<UserSeat>(this.attach_UserSeat), new Action<UserSeat>(this.detach_UserSeat));
-			this._GameAction = new EntitySet<GameAction>(new Action<GameAction>(this.attach_GameAction), new Action<GameAction>(this.detach_GameAction));
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GameID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int GameID
 		{
 			get
@@ -852,6 +910,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public string Name
 		{
 			get
@@ -872,6 +931,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public bool IsActive
 		{
 			get
@@ -892,6 +952,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartTime", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.DateTime StartTime
 		{
 			get
@@ -912,6 +973,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndTime", DbType="DateTime")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public System.Nullable<System.DateTime> EndTime
 		{
 			get
@@ -932,6 +994,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Round", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public int Round
 		{
 			get
@@ -952,6 +1015,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentButtonPosition", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public int CurrentButtonPosition
 		{
 			get
@@ -971,11 +1035,17 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Games_UserSeats", Storage="_UserSeat", ThisKey="GameID", OtherKey="GameID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_UserSeat", Storage="_UserSeat", ThisKey="GameID", OtherKey="GameID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
 		public EntitySet<UserSeat> UserSeat
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._UserSeat.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._UserSeat;
 			}
 			set
@@ -984,11 +1054,17 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Games_GameActions", Storage="_GameAction", ThisKey="GameID", OtherKey="GameID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_GameAction", Storage="_GameAction", ThisKey="GameID", OtherKey="GameID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9, EmitDefaultValue=false)]
 		public EntitySet<GameAction> GameAction
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._GameAction.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._GameAction;
 			}
 			set
@@ -1040,9 +1116,38 @@ namespace PokerStatsDataAccess
 			this.SendPropertyChanging();
 			entity.Game = null;
 		}
+		
+		private void Initialize()
+		{
+			this._UserSeat = new EntitySet<UserSeat>(new Action<UserSeat>(this.attach_UserSeat), new Action<UserSeat>(this.detach_UserSeat));
+			this._GameAction = new EntitySet<GameAction>(new Action<GameAction>(this.attach_GameAction), new Action<GameAction>(this.detach_GameAction));
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1062,6 +1167,8 @@ namespace PokerStatsDataAccess
 		
 		private EntitySet<GameAction> _GameAction;
 		
+		private bool serializing;
+		
     #region Definitionen der Erweiterungsmethoden
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1080,12 +1187,11 @@ namespace PokerStatsDataAccess
 		
 		public User()
 		{
-			this._UserSeat = new EntitySet<UserSeat>(new Action<UserSeat>(this.attach_UserSeat), new Action<UserSeat>(this.detach_UserSeat));
-			this._GameAction = new EntitySet<GameAction>(new Action<GameAction>(this.attach_GameAction), new Action<GameAction>(this.detach_GameAction));
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int UserID
 		{
 			get
@@ -1106,6 +1212,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public string Name
 		{
 			get
@@ -1126,6 +1233,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public string PasswordHash
 		{
 			get
@@ -1146,6 +1254,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImageID", DbType="NVarChar(50)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public string ImageID
 		{
 			get
@@ -1166,6 +1275,7 @@ namespace PokerStatsDataAccess
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login", DbType="NVarChar(80) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public string Login
 		{
 			get
@@ -1185,11 +1295,17 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_UserSeats", Storage="_UserSeat", ThisKey="UserID", OtherKey="UserID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserSeat", Storage="_UserSeat", ThisKey="UserID", OtherKey="UserID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
 		public EntitySet<UserSeat> UserSeat
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._UserSeat.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._UserSeat;
 			}
 			set
@@ -1198,11 +1314,17 @@ namespace PokerStatsDataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_GameActions", Storage="_GameAction", ThisKey="UserID", OtherKey="UserID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_GameAction", Storage="_GameAction", ThisKey="UserID", OtherKey="UserID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
 		public EntitySet<GameAction> GameAction
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._GameAction.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._GameAction;
 			}
 			set
@@ -1253,6 +1375,34 @@ namespace PokerStatsDataAccess
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
+		}
+		
+		private void Initialize()
+		{
+			this._UserSeat = new EntitySet<UserSeat>(new Action<UserSeat>(this.attach_UserSeat), new Action<UserSeat>(this.detach_UserSeat));
+			this._GameAction = new EntitySet<GameAction>(new Action<GameAction>(this.attach_GameAction), new Action<GameAction>(this.detach_GameAction));
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
 		}
 	}
 }

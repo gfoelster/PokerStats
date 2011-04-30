@@ -33,28 +33,28 @@
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(2.75 : 7.03125); (3.59375 : 7.03125); (3.59375 : 5.70359537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/PokerDBDataContext/Game/Games_UserSeats" />
+      <AssociationMoniker Name="/PokerDBDataContext/Game/Game_UserSeat" />
       <nodes>
         <classShapeMoniker Id="4107d6d2-b913-4f4a-8d6f-aea90bd70ad4" />
         <classShapeMoniker Id="9a0e0a56-3105-4a6e-a4be-d71cdf45d4c8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.87653746153846); (3.125 : 6.50153746153846); (3.125 : 1.92390055338542); (3.5 : 1.92390055338542)]" fixedFrom="NotFixed" fixedTo="Algorithm">
-      <AssociationMoniker Name="/PokerDBDataContext/Game/Games_GameActions" />
-      <nodes>
-        <classShapeMoniker Id="4107d6d2-b913-4f4a-8d6f-aea90bd70ad4" />
-        <classShapeMoniker Id="3ea1d347-7aea-4a5f-b002-2d1701bddec4" />
-      </nodes>
-    </associationConnector>
     <associationConnector edgePoints="[(2.75 : 4.91429768880208); (3.04166666666667 : 4.91429768880208 : JumpStart); (3.20833333333333 : 4.91429768880208 : JumpEnd); (3.5 : 4.91429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/PokerDBDataContext/User/Users_UserSeats" />
+      <AssociationMoniker Name="/PokerDBDataContext/User/User_UserSeat" />
       <nodes>
         <classShapeMoniker Id="ef8017b1-9113-4e6a-a977-f4c2b0938342" />
         <classShapeMoniker Id="9a0e0a56-3105-4a6e-a4be-d71cdf45d4c8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 4); (1.75 : 2.54210333007812); (3.04166666666667 : 2.54210333007812 : JumpStart); (3.20833333333333 : 2.54210333007812 : JumpEnd); (3.5 : 2.54210333007812)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/PokerDBDataContext/User/Users_GameActions" />
+    <associationConnector edgePoints="[(2.75 : 6.87653746153846); (3.125 : 6.50153746153846); (3.125 : 1.92390055338542); (3.5 : 1.92390055338542)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PokerDBDataContext/Game/Game_GameAction" />
+      <nodes>
+        <classShapeMoniker Id="4107d6d2-b913-4f4a-8d6f-aea90bd70ad4" />
+        <classShapeMoniker Id="3ea1d347-7aea-4a5f-b002-2d1701bddec4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 4); (1.75 : 2.54210333007813); (3.04166666666667 : 2.54210333007812 : JumpStart); (3.20833333333333 : 2.54210333007813 : JumpEnd); (3.5 : 2.54210333007813)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PokerDBDataContext/User/User_GameAction" />
       <nodes>
         <classShapeMoniker Id="ef8017b1-9113-4e6a-a977-f4c2b0938342" />
         <classShapeMoniker Id="3ea1d347-7aea-4a5f-b002-2d1701bddec4" />

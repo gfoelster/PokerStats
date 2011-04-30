@@ -40,7 +40,7 @@ namespace PokerStatsProcessor
                 else
                 {
                     List<GameAction> uncommittedActions = ctx.GetUncommittedActions();
-
+                   
                     var gameActions = (from a in uncommittedActions
                                             group a by a.GameID into games
                                             select games).ToList();

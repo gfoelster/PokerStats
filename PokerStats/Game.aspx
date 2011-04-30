@@ -6,12 +6,14 @@
     <title></title>
     <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/jquery-1.4.1.js" type="text/javascript"></script>
+    <script src="Scripts/PokerLogic.js" type="text/javascript"></script>
     <script type="text/javascript">
          <!--
         var chatPosition = -1;
         var eventPosition = -1;
         var currentUser;
         var allUsers = [];
+        var playerPositions = [8];
 
         $(document).ready(function ()
         {
@@ -23,6 +25,9 @@
                     PostChatMessage();
                 }
             }).focus();
+
+            // hide all users
+            $(".playerPanel").hide();
 
             $("#chatSubmitButton").click(PostChatMessage);
 
@@ -58,16 +63,6 @@
                 $("#userAvatar").attr("src", user.ImageID)
                                 .attr("title", user.Name);
             });
-        }
-
-        function ProcessEvent(evt)
-        {
-            switch (evt.ActionTypeID)
-            {
-                case 1: DisplayText("JoinAction"); break;
-                default: alert("Unknown action type!"); break;
-
-            }
         }
 
         function DisplayText(text)
@@ -168,6 +163,13 @@
             width:20px; height:20px;
             margin-top:4px;
             margin-right:3px;
+        }
+        
+        .specialPosition
+        {
+            float:right;
+            width:20px; height:20px;
+            margin-left:3px;
         }
         
         #chatInputArea
@@ -308,48 +310,56 @@
         <img id="table" alt="" src="Images/tablev2.png" class="tableBackground" />
 
         <div id="player1" class="playerPanel player1">
+            <div class="specialPosition"></div>
             <img id="player1Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif" />
             <span class="playerName">1 </span><span class="chipStack">Chips: </span>
             <img id="player1Card1" class="leftcard" alt="" src="cards/3c.png" />
             <img id="player1Card2" class="rightcard" alt="" src="cards/3s.png" />
         </div>
         <div id="player2" class="playerPanel player2">
+            <div class="specialPosition"></div>
             <img id="player2Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif" />
             <span class="playerName">2 </span><span class="chipStack">Chips: </span>
             <img id="player2Card1" class="leftcard" alt="" src="cards/3c.png" />
             <img id="player2Card2" class="rightcard" alt="" src="cards/3s.png" />
         </div>
         <div id="player3" class="playerPanel player3">
+            <div class="specialPosition"></div>
             <img id="player3Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif" />
             <span class="playerName">3 </span><span class="chipStack">Chips: </span>
             <img id="player3Card1" class="leftcard" alt="" src="cards/3c.png" />
             <img id="player3Card2" class="rightcard" alt="" src="cards/3s.png" />
         </div>
         <div id="player4" class="playerPanel player4">
+            <div class="specialPosition"></div>
             <img id="player4Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif" />
             <span class="playerName">4 </span><span class="chipStack">Chips: </span>
             <img id="player4Card1" class="leftcard" alt="" src="cards/3c.png" />
             <img id="player4Card2" class="rightcard" alt="" src="cards/3s.png" />
         </div>
         <div id="player5" class="playerPanel player5">
+            <div class="specialPosition"></div>
             <img id="player5Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif" />
             <span class="playerName">5 </span><span class="chipStack">Chips: </span>
             <img id="player5Card1" class="leftcard" alt="" src="cards/3c.png" />
             <img id="player5Card2" class="rightcard" alt="" src="cards/3s.png" />
         </div>
         <div id="player6" class="playerPanel player6">
+            <div class="specialPosition"></div>
             <img id="player6Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif" />
             <span class="playerName">6 </span><span class="chipStack">Chips: </span>
             <img id="player6Card1" class="leftcard" alt="" src="cards/3c.png" />
             <img id="player6Card2" class="rightcard" alt="" src="cards/3s.png" />
         </div>
         <div id="player7" class="playerPanel player7">
+            <div class="specialPosition"></div>
             <img id="player7Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif" />
             <span class="playerName">7 </span><span class="chipStack">Chips: </span>
             <img id="player7Card1" class="leftcard" alt="" src="cards/3c.png" />
             <img id="player7Card2" class="rightcard" alt="" src="cards/3s.png" />
         </div>
         <div id="player8" class="playerPanel player8">
+            <div class="specialPosition"></div>
             <img id="player8Avatar" class="avatar" alt="" src="Images/anonymous_avatar.gif" />
             <span class="playerName">8 </span><span class="chipStack">Chips: </span>
             <img id="player8Card1" class="leftcard" alt="" src="cards/3c.png" />

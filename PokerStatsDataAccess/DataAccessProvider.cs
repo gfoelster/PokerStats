@@ -110,9 +110,11 @@ namespace PokerStatsDataAccess
         }
         public List<GameAction> GetCommittedActions(int gameID, int fromPositionExclusive)
         {
-            return ctx.GameAction.Where(ga => ga.GameID == gameID && ga.GameActionID > fromPositionExclusive)
+            var actions = ctx.GameAction.Where(ga => ga.GameID == gameID && ga.GameActionID > fromPositionExclusive && ga.IsCommitted)
                                   .OrderBy(ga => ga.GameActionID)
                                   .ToList();
+            actions.Where(a => a.ActionTypeID == (int)ActionTypes.UserJoined).Select(a => { a.User = GetUserByID(a.UserID.Value); return a; }); 
+            return actions;
         }
 
         public List<int> GetUsersInGame(Game game)
@@ -142,10 +144,14 @@ namespace PokerStatsDataAccess
             int freeSeatNumber = 1;
             for (int i = 1; i <= seatCount; i++)
             {
-                if (freeSeatIndex == freeSeatNumber)
+                if(!reservedSeats.Contains(i))
+                    freeSeatIndex--;
+                if (freeSeatIndex == 0)
+                {
+                    freeSeatNumber = i;
                     break;
-                else if(!reservedSeats.Contains(i))
-                    freeSeatNumber++;
+                }
+
             }
 
             return freeSeatNumber;
@@ -195,7 +201,8 @@ namespace PokerStatsDataAccess
             Console.WriteLine(String.Format("{0} is placed on seat {1}.", user.Name, freeSeat));
 
             GameAction action = ctx.GameAction.Single(ga => ga.GameActionID == gameActionID);
-            action.Data = seat.ToString();
+            action.Data = seat.Seat.ToString();
+           
             action.IsCommitted = true;
             ctx.SubmitChanges();
         }

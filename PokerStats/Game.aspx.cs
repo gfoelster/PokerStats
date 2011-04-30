@@ -52,9 +52,6 @@ namespace PokerStats
         {
             List<GameAction> gameActions = DataAccessProvider.Current.GetCommittedActions(gameID, position);
             
-            // set linked entities null for serialization
-            gameActions.ForEach((ga) => { ga.User = null; ga.Game = null; });
-
             // serialize to json
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<GameAction>));
             MemoryStream ms = new MemoryStream();
